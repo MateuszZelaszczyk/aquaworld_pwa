@@ -8,8 +8,8 @@ const NaviBar = () => {
       <NavLink className={style.NavHome} to="/">
         <img className={style.Icon} alt="Icon" src={Icon} />
       </NavLink>
-      <button className={style.LogIn}>Zaloguj się</button>
-      <button className={style.Register}>Zarejestruj się</button>
+      <NavLink to="/login"><button className={style.LogIn}>Zaloguj się</button></NavLink>
+      <NavLink to="/register"><button className={style.Register}>Zarejestruj się</button></NavLink>
     </div>
   );
 };
