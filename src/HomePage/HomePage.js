@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./HomePage.module.css";
-import NaviBar from "./NaviBarHome";
+import NaviBar from "./NaviBarHome.js";
 import Fish from "../Assets/Fish.jpg";
 import Icon from "../Assets/TalkFish.png";
 const HomePage = () => {

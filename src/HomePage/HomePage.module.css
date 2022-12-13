@@ -6,7 +6,7 @@
 .MainWindow {
     position: absolute;
     background: url("../Assets/bg.jpg") no-repeat center center;
-    background-size: 100% 100%;
+   background-size: 100% 100%;
     width: 100%;
     min-height: 630px;
     height: 100%;
@@ -30,7 +30,7 @@
 .MainContainer {
     width: 100%;
     position: absolute;
-    top: 0;
+    top: 70px;
 }
 
 .Icon {
@@ -155,7 +155,7 @@
     .InfoText{
         font-size: 16px;
         width: 90%;
-        height:60%;
+        height:50%;
         margin-top:3px;
     }
     .TalkFish{
