@@ -1,0 +1,108 @@
+.LogInWindow {
+    min-height: 100vh;
+    background: linear-gradient(180deg, rgba(73, 149, 154, 0.65) 0%,
+            rgba(139, 214, 219, 0.65) 52.08%, rgba(255, 255, 255, 0.86) 100%);
+}
+
+.LogInContainer {
+    position: relative;
+    width: 475px;
+    height: 464px;
+    top: 128px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.LogInHeader {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    background: #2490CC;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    align-items: center;
+    text-align: center;
+}
+
+.LogInForm {
+    width: 90%;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.LogInFormLabel {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #303030;
+
+    opacity: 0.7;
+}
+
+.LogInFormInput {
+    background: #FCFCFC;
+    border: 1px solid #7F7F7F;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 35px;
+    margin-bottom: 20px;
+}
+
+.LogInFormBtn {
+    width: 100%;
+    height: 35px;
+    background: #2490CC;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-self: center;
+    cursor: pointer;
+}
+
+.LogInFormLink, .LogInResetLink {
+    margin-top: 20px;
+    color: #000000;
+    width: 180px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+
+}
+
+.Link_btn_Container {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.LogInResetLink {
+    position: absolute;
+    grid-column-start: 2;
+    width: 169px;
+    right:22px;
+    margin-top:52px
+}
