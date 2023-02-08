@@ -1,0 +1,71 @@
+.MainNaviMenu {
+    background-color: #ffffff;
+box-shadow: 0px 5px 5px rgba(1, 1, 0, 0.24);
+
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.LogoContainer{
+    display: flex;
+    align-items: center;
+}
+.Logo{
+    margin-left:15px;
+    color: rgb(0, 81, 255);
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: bold;
+}
+.Foto{
+    height:33px;
+    width: 33px;
+    margin-left: 4px;
+
+}
+.ElementsList {
+    z-index: 1;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    width: 450px;
+    height: 100%;
+    justify-content: space-around;
+}
+
+.ListItem,.ProfilContainer {
+    cursor: pointer;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #2063ffa9;
+}
+
+.ListItem {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.Search{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom:1px solid rgb(213, 213, 217);
+    width: 200px;
+    gap:5px;
+}
+.Search:focus{
+    outline: none;
+}
+.ProfilContainer{
+    background:none;
+    border: none;
+}
