@@ -31,7 +31,9 @@ class LogInPage extends React.Component {
               required
             />
             <div className={style.Link_btn_Container}>
-              <button className={style.LogInFormBtn}>Zaloguj się</button>
+              <NavLink className={style.LogInFormBtn} to="/mainpage">
+                <button className={style.LogInFormBtn}>Zaloguj się</button>
+              </NavLink>
               <NavLink className={style.LogInFormLink} to="/register">
                 <p>Nie masz konta? Zarejestruj się</p>
               </NavLink>
