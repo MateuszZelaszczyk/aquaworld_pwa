@@ -6,6 +6,8 @@ import RegisterPage from "./RegisterPage/RegisterPage.js";
 import RePassword from "./PasswordReset/RePassword.js";
 import NewPassword from "./PasswordReset/NewPassword.js";
 import MainPage from "./MainPage/MainPage.js";
+import NewAqua from "./NewAqua/AddAqua.js";
+import MyAqua from "./MyAqua/MyAqua.js";
 const App = () => {
   return (
     <BrowserRouter>
@@ -16,6 +18,8 @@ const App = () => {
         <Route exact path="/repassword" element={<RePassword/>}/>
         <Route exact path="/newpassword" element={<NewPassword/>}/>
         <Route exact path="/mainpage" element={<MainPage/>}/>
+        <Route exact path="/newaqua" element={<NewAqua/>}/>
+        <Route exact path="/myaqua" element={<MyAqua/>}/>
       </Routes>
     </BrowserRouter>
   );

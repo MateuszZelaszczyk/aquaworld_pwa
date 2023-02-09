@@ -1,0 +1,137 @@
+.NewAquaContainer {
+    position: relative;
+    width: 475px;
+    height: 550px;
+    top: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 3px 0px
+}
+.NewAquaForm {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-bottom:40px;
+}
+
+.NewAquaFormLabel {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #303030;
+
+    opacity: 0.7;
+}
+.NewAquaFormInput {
+    background: #FCFCFC;
+    border: 1px solid #7F7F7F;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 25px;
+    margin-bottom: 20px;
+    
+}
+input:focus{
+    outline: none;
+}
+.SizeContainer{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+.SizeLegend{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+.NewAquaSize{
+    background: #FCFCFC;
+    border: 1px solid #7F7F7F;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    height: 25px;
+    margin-bottom: 20px;
+    width: 100px;
+}
+.NewAquaFormBtn {
+    width: 100%;
+    height: 35px;
+    background: #2490CC;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-self: center;
+    cursor: pointer;
+}
+.AquaTypeContainer{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 4px 1px;
+}
+.TypeLegend{
+    grid-column-start:1;
+    grid-column-end: 3;
+    margin-bottom: 10px;
+}
+.NewAquaType{
+    margin-left:10px;
+    cursor: pointer;
+}
+.RadioContainer{
+    display: flex;
+
+}
+.Save, .Back{
+    height: 25px;
+    border-radius: none;
+    background-color: #2490CC;
+    border: none;
+    font-size: 18px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    color: #ffffff;
+    cursor: pointer;
+    
+}
+.NewAquaFoto{
+    width: 300px;
+    margin-bottom: 15px;
+    margin-top: 7px;
+    outline: none;
+
+}
+.Avatar{
+    width: 45px;
+    height: 45px;
+}
+.BtnContainer{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 40% 10% 40%;
+
+}
+.Save{
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+.Back{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: rgb(250, 90, 90);
+    text-decoration: none;
+}
