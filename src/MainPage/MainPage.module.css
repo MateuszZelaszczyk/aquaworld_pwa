@@ -69,3 +69,8 @@ box-shadow: 0px 5px 5px rgba(1, 1, 0, 0.24);
     background:none;
     border: none;
 }
+.Link{
+    text-decoration: none;
+    color: #2063ffa9;
+
+}
