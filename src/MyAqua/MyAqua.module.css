@@ -1,0 +1,129 @@
+.AquaContainer {
+    width: 85%;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns:13% 12% 10% 20% 15% 12% 18%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow:0 0 4px 1px; 
+}
+
+.ItemContainer {
+
+    display: grid;
+    grid-template-columns:13% 12% 10% 20% 15% 12% 18%;
+    grid-column-start: 1 ;
+    grid-column-end:8;
+    margin-top: 10px;
+    border-bottom: 1px solid black;
+    
+
+}
+
+.HeadContainer {
+    grid-column-start: 1 ;
+    grid-column-end:8;
+    display: grid;
+    grid-template-columns:13% 12% 10% 20% 15% 12% 18%;
+    border-bottom: 1px solid black;
+    height:30px;
+    background-color:lightblue;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    
+}
+.BtnContainer {
+    display: grid;
+    grid-template-columns:50% 50%;
+
+
+}
+
+.BackBtn{
+    width:200px;
+    margin-left: 7.5%;
+    margin-top:20px;
+    border: none;
+    border-radius: 0;
+    height: 30px;
+    font-size:18px;
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 0 0 4px 1px;
+
+}
+.Head1, .AquaFoto{
+    grid-column-start: 1;
+    grid-column-end:2;
+    width:60px;
+    height:60px;
+    margin-left: 5px;
+
+}
+.Head2, .Para1 {
+    grid-column-start: 2;
+    grid-column-end:3;
+
+}
+.Head3, .Para2 {
+    grid-column-start: 3;
+    grid-column-end:4;
+
+}
+.Head4, .Size {
+    grid-column-start: 4;
+    grid-column-end:5;
+
+}
+.Head5, .Para3 {
+    grid-column-start: 5;
+    grid-column-end:6;
+
+}
+.Head6, .Para4 {
+    grid-column-start: 6;
+    grid-column-end:7;
+
+}
+.Head7, .BtnContainer {
+    grid-column-start: 7;
+    grid-column-end:8;
+
+}
+.MoreInfoBtn, .MoreBtn, .EditBtn, .DeleteBtn{
+    border-radius: 0;
+    border:none;
+    margin-top:4px;
+    height:20px;
+    cursor: pointer;
+    color: rgb(27, 27, 27);
+    font-weight: bold;
+    width:90px;
+    background-color: white;
+    box-shadow:  0 0 2px 1px;
+    margin-left:2px;
+}
+.EditBtn, .DeleteBtn{
+    width:90px;
+}
+.MoreInfoBtn{
+    grid-column-start: 1;
+    grid-column-end:2;
+}
+.MoreBtn{
+    grid-column-start: 2;
+    grid-column-end:3;
+
+}
+.EditBtn{
+    grid-column-start:1;
+    grid-column-end:2;
+
+}
+.DeleteBtn{
+    grid-column-start:2;
+    grid-column-end:3;
+
+}

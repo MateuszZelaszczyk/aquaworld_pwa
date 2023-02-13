@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navi from "../MainPage/Navi";
 import style from "./MyAqua.module.css";
 import Foto from "../Assets/IconFish.png";
+import { NavLink } from "react-router-dom";
 
 const data = [
   {
@@ -10,7 +11,7 @@ const data = [
     wymiary: [{ szerokosc: 150, wysokosc: 50, glebokosc: 50 }],
     zalozono: "10-11-2022",
     rodzaj: "słodkowodne",
-    zdjecie: { Foto },
+    zdjecie: Foto,
   },
   {
     name: "gupikarium",
@@ -18,7 +19,7 @@ const data = [
     wymiary: [{ szerokosc: 50, wysokosc: 35, glebokosc: 25 }],
     zalozono: "10-11-2012",
     rodzaj: "słodkowodne",
-    zdjecie: { Foto },
+    zdjecie: Foto,
   },
 ];
 const MyAqua = () => {
@@ -26,29 +27,43 @@ const MyAqua = () => {
     <div className={style.MainContainer}>
       <Navi />
       <div className={style.AquaContainer}>
+        <div className={style.HeadContainer}>
+          <p className={style.Head1}>Zdjęcie</p>
+          <p className={style.Head2}>Nazwa</p>
+          <p className={style.Head3}>Pojmeność (l)</p>
+          <p className={style.Head4}>Wymiary (cm)</p>
+          <p className={style.Head5}>Data założenia</p>
+          <p className={style.Head6}>Rodzaj</p>
+          <p className={style.Head7}></p>
+        </div>
         {data.map((fish, index) => (
-          <div key={index}>
-            <p>Nazwa: {fish.name}</p>
-            <p>Pojmeność zbiornika: {fish.pojemnosc}</p>
-            <div>
-              Wymiary:{" "}
+          <div key={index} className={style.ItemContainer}>
+            <img className={style.AquaFoto} alt="" src={fish.zdjecie} />
+            <p className={style.Para1}>{fish.name}</p>
+            <p className={style.Para2}>{fish.pojemnosc}</p>
+            <div className={style.SizeContainer}>
               {fish.wymiary.map((size, ind) => (
-                <div key={ind}>
-                  <p>Szerokość: {size.szerokosc}</p>
-                  <p>Wysokość: {size.wysokosc}</p>
-                  <p>Głębokość: {size.glebokosc}</p>
+                <div className={style.Size} key={ind}>
+                  <p className={style.SizeParagraph}>Sz: {size.szerokosc}</p>
+                  <p className={style.SizeParagraph}>Wy: {size.wysokosc}</p>
+                  <p className={style.SizeParagraph}>Gł: {size.glebokosc}</p>
                 </div>
               ))}
             </div>
-            <p>Data założenia: {fish.zalozono}</p>
-            <p>Rodzaj akwarium: {fish.rodzaj}</p>
-            <button>Dodaj więcej informacji</button>
-            <button>Edytuj</button>
-            <button>Usuń</button>
+            <p className={style.Para3}>{fish.zalozono}</p>
+            <p className={style.Para4}>{fish.rodzaj}</p>
+            <div className={style.BtnContainer}>
+              <button className={style.MoreInfoBtn}>Szczegóły</button>
+              <button className={style.MoreBtn}>+ informacje</button>
+              <button className={style.EditBtn}>Edytuj</button>
+              <button className={style.DeleteBtn}>Usuń</button>
+            </div>
           </div>
         ))}
-        <button>Strona główna</button>
       </div>
+      <button className={style.BackBtn}>
+        <NavLink to="/mainpage" style={{color:"black", textDecoration:"none"}}>Strona główna</NavLink>
+      </button>
     </div>
   );
 };
