@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import Navi from "../MainPage/Navi";
 import style from "./AddAqua.module.css";
-const NewAqua = () => {
+const MoreInformation = () => {
   const [fish, setFish] = useState([{ fish: { name: "", quantity: 0 } }]);
   const [plants, setPLants] = useState([{ plant: { name: "", quantity: 0 } }]);
   const handleChange = (index, event, id) => {
@@ -92,9 +93,10 @@ const NewAqua = () => {
             </button>
           </div>
         </form>
+        <NavLink className={style.BackBtn} to="/profile/myaqua">Powrót</NavLink>
       </div>
     </div>
   );
 };
 
-export default NewAqua;
+export default MoreInformation;
