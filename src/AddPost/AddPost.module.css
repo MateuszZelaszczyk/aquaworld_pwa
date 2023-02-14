@@ -67,7 +67,7 @@ input:focus, textarea:focus{
 .RadioContainer{
     display: flex;
 }
-.Save, .Back{
+.Save, .Back, .AddFoto{
     height: 25px;
     border-radius: none;
     background-color: #2490CC;
@@ -88,23 +88,23 @@ input:focus, textarea:focus{
     
 }
 .Foto{
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     border: none;
+    margin-left:40px;
 
 
 }
 .BtnContainer{
     width: 100%;
     display: grid;
-
-
 }
 .Save{
     grid-column-start: 7;
     grid-column-end: 8;
     max-width: 200px;
 }
+
 .Back{
     grid-column-start: 1;
     grid-column-end: 2;
@@ -113,3 +113,46 @@ input:focus, textarea:focus{
     grid-row-start: 1;
     max-width: 200px;
 }
+.BackLink{
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: white;
+}
+.AddFoto{
+    width:200px;
+    margin-bottom: 15px;
+    border:none;
+    background-color: #43cbe3;
+    cursor: pointer;
+
+}
+
+.File {
+    position: relative;
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .File input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .File label {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+  }
+  .NewAquaFoto{
+    
+  }
+
