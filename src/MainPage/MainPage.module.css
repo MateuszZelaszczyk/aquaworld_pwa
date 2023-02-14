@@ -133,6 +133,20 @@ box-shadow: 0px 5px 5px rgba(1, 1, 0, 0.24);
     padding-top: 20px;
     overflow-y: scroll;
 }
+.UsersType{
+    display: flex;
+    justify-content: space-around;
+    height: 30px;
+}
+
+.Header1Btn, .Header2Btn{
+    width:50%;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
 .User{
     display: flex;
     align-items: center;
@@ -157,6 +171,8 @@ box-shadow: 0px 5px 5px rgba(1, 1, 0, 0.24);
 }
 .InteractContainer{
  background-color: #c4eeff;
+ max-height: 200px;
+ overflow-y: auto;
 }
 .CommentSection{
     margin-bottom: 5px;
