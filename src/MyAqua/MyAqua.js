@@ -54,7 +54,11 @@ const MyAqua = () => {
             <p className={style.Para4}>{fish.rodzaj}</p>
             <div className={style.BtnContainer}>
               <button className={style.MoreInfoBtn}>Szczegóły</button>
-              <button className={style.MoreBtn}>+ informacje</button>
+              <button className={style.MoreBtn}>
+                <NavLink className={style.MoreLink} to={`/profile/myaqua/add_information/${index}`}>
+                  + Informacje
+                </NavLink>
+              </button>
               <button className={style.EditBtn}>Edytuj</button>
               <button className={style.DeleteBtn}>Usuń</button>
             </div>
@@ -62,7 +66,12 @@ const MyAqua = () => {
         ))}
       </div>
       <button className={style.BackBtn}>
-        <NavLink to="/mainpage" style={{color:"black", textDecoration:"none"}}>Strona główna</NavLink>
+        <NavLink
+          to="/profile/mainpage"
+          style={{ color: "black", textDecoration: "none" }}
+        >
+          Strona główna
+        </NavLink>
       </button>
     </div>
   );
