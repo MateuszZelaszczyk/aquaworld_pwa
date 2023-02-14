@@ -116,8 +116,9 @@ input:focus{
 
 }
 .Avatar{
-    width: 45px;
-    height: 45px;
+    width: 36px;
+    height: 36px;
+    margin-left: 40px;
 }
 .BtnContainer{
     width: 100%;
@@ -133,5 +134,22 @@ input:focus{
     grid-column-start: 1;
     grid-column-end: 2;
     background-color: rgb(250, 90, 90);
+}
+.BackBtn{
+    color: #000000;
+    display: block;
+    width: 200px;
+    height:25px;
+    background-color: rgb(250, 90, 90);
+    text-align: center;
+    font-size:18px;
+    color: #000000;
+    font-weight: bold;
+}
+.BackLink{
     text-decoration: none;
+    color: #ffffff;
+    display: block;
+    width: 100%;
+    height: 100%;
 }

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Navi from "../MainPage/Navi";
 import style from "./AddAqua.module.css";
+import styleField from "../AddPost/AddPost.module.css"
 import Avatar from "../Assets/Avatar.png";
 import { NavLink } from "react-router-dom";
+
 const NewAqua = () => {
   //const avatarUrl = UserAvatar;
   const [avatarShow, setAvatarShow] = useState(null);
@@ -13,6 +15,7 @@ const NewAqua = () => {
     const objectURL = URL.createObjectURL(file);
     setAvatarShow(objectURL);
   };
+
   return (
     <div>
       <Navi />
@@ -115,12 +118,11 @@ const NewAqua = () => {
               />
             </div>
           </div>
-          <label className={style.NewAquaFormLabel} htmlFor="foto">
-            Wstaw zdjęcie
-          </label>
-          <div>
+
+          <div className={styleField.File}>
+              <label htmlFor="foto">Wybierz zdjęcie</label>
             <input
-              className={style.NewAquaFoto}
+              className={styleField.NewAquaFoto}
               type="file"
               alt=""
               name="foto"
@@ -130,7 +132,7 @@ const NewAqua = () => {
             <img className={style.Avatar} src={avatarShow} alt=""></img>
           </div>
           <div className={style.BtnContainer}>
-            <button className={style.Back}><NavLink to="/mainpage" className={style.Back}>Anuluj</NavLink></button>
+            <button className={style.Back}><NavLink to="/profile/mainpage" className={style.BackLink}>Anuluj</NavLink></button>
             <button type="submit" className={style.Save}>Zapisz</button>
           </div>
         </form>
