@@ -8,6 +8,7 @@ import NewPassword from "./PasswordReset/NewPassword.js";
 import MainPage from "./MainPage/MainPage.js";
 import NewAqua from "./NewAqua/AddAqua.js";
 import MyAqua from "./MyAqua/MyAqua.js";
+import NewPost from "./AddPost/AddPost.js";
 const App = () => {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact path="/mainpage" element={<MainPage/>}/>
         <Route exact path="/newaqua" element={<NewAqua/>}/>
         <Route exact path="/myaqua" element={<MyAqua/>}/>
+        <Route exact path="/newpost" element={<NewPost/>}/>
       </Routes>
     </BrowserRouter>
   );

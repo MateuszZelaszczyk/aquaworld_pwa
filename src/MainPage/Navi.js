@@ -24,7 +24,7 @@ const Navi = () => {
               Moje akwaria
             </NavLink>
           </li>
-          <li className={style.ListItem}>+Dodaj post</li>
+          <li className={style.ListItem}><NavLink className={style.Link} to="/newpost">+Dodaj post</NavLink></li>
           <li className={style.ListItem}>
             <NavLink className={style.Link} to="/newaqua">
               +Dodaj akwarium
