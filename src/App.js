@@ -9,6 +9,7 @@ import MainPage from "./MainPage/MainPage.js";
 import NewAqua from "./NewAqua/AddAqua.js";
 import MyAqua from "./MyAqua/MyAqua.js";
 import NewPost from "./AddPost/AddPost.js";
+import MoreInformation from "./NewAqua/MoreInformations.js";
 const App = () => {
   return (
     <BrowserRouter>
@@ -18,10 +19,11 @@ const App = () => {
         <Route exact path="/register" element={<RegisterPage/>}/>
         <Route exact path="/repassword" element={<RePassword/>}/>
         <Route exact path="/newpassword" element={<NewPassword/>}/>
-        <Route exact path="/mainpage" element={<MainPage/>}/>
-        <Route exact path="/newaqua" element={<NewAqua/>}/>
-        <Route exact path="/myaqua" element={<MyAqua/>}/>
-        <Route exact path="/newpost" element={<NewPost/>}/>
+        <Route exact path="/profile/mainpage" element={<MainPage/>}/>
+        <Route exact path="/profile/newaqua" element={<NewAqua/>}/>
+        <Route exact path="/profile/myaqua" element={<MyAqua/>}/>
+        <Route exact path="/profile/myaqua/add_information/:id" element={<MoreInformation/>}/>
+        <Route exact path="/profile/newpost" element={<NewPost/>}/>
       </Routes>
     </BrowserRouter>
   );
