@@ -12,7 +12,7 @@ const Navi = () => {
   return (
     <nav className={style.MainNaviContainer}>
       <div className={style.MainNaviMenu}>
-        <NavLink to="/mainpage" className={style.LogoContainer}>
+        <NavLink to="/profile/mainpage" className={style.LogoContainer}>
           <p className={style.Logo}>AquaWorld</p>{" "}
           <img className={style.Foto} src={foto} alt="user" />
         </NavLink>
@@ -20,13 +20,13 @@ const Navi = () => {
         <input className={style.Search} type="text" placeholder="Wyszukaj..." />
         <ul className={style.ElementsList}>
           <li className={style.ListItem}>
-            <NavLink className={style.Link} to="/myaqua">
+            <NavLink className={style.Link} to="/profile/myaqua">
               Moje akwaria
             </NavLink>
           </li>
-          <li className={style.ListItem}><NavLink className={style.Link} to="/newpost">+Dodaj post</NavLink></li>
+          <li className={style.ListItem}><NavLink className={style.Link} to="/profile/newpost">+Dodaj post</NavLink></li>
           <li className={style.ListItem}>
-            <NavLink className={style.Link} to="/newaqua">
+            <NavLink className={style.Link} to="/profile/newaqua">
               +Dodaj akwarium
             </NavLink>
           </li>
