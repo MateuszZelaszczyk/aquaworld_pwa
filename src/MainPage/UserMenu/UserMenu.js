@@ -1,4 +1,5 @@
 import React, {useEffect, useRef} from "react";
+import { NavLink } from "react-router-dom";
 import style from "./UserMenu.module.css";
 const UserMenu = (props) => {
   
@@ -23,8 +24,7 @@ const UserMenu = (props) => {
     <div className={style.MenuContainer} ref={refOne}>
       <button className={style.MenuBtn}>Ustawienia konta</button>
       <button className={style.MenuBtn}>Edytuj/dodaj zdjęcie</button>
-      <button className={style.MenuBtn}>Zmień hasło</button>
-      <button className={style.MenuBtn}>Wyloguj</button>
+      <NavLink to="/" className={style.MenuBtn}>Wyloguj</NavLink>
     </div>
   );
 };
