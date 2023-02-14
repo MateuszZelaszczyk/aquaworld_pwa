@@ -1,0 +1,115 @@
+.NewPostContainer {
+    position: relative;
+    width: 90%;
+    min-height: 450px;
+    top: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 3px 0px
+}
+.PostForm {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-bottom:40px;
+}
+
+.NewPostLabel {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #303030;
+    opacity: 0.7;
+}
+.PostTitle, .PostDescribe {
+    background: #FCFCFC;
+    border: 1px solid #7F7F7F;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 25px;
+    margin-bottom: 20px;
+    
+}
+.PostDescribe{
+    max-width: 100%;
+    min-height:80px;
+}
+input:focus, textarea:focus{
+    outline: none;
+}
+
+.Legend{
+    grid-column-start:1;
+    grid-column-end: 3;
+    margin-bottom: 10px;
+}
+.NewPostVisible{
+    margin-left:10px;
+    cursor: pointer;
+}
+.NewPostType{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 4px 1px;
+    max-width: 400px;
+}
+.RadioContainer{
+    display: flex;
+}
+.Save, .Back{
+    height: 25px;
+    border-radius: none;
+    background-color: #2490CC;
+    border: none;
+    font-size: 18px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    color: #ffffff;
+    cursor: pointer;
+    
+}
+.NewPostFile{
+    width: 300px;
+    margin-bottom: 15px;
+    margin-top: 7px;
+    outline: none;
+    
+}
+.Foto{
+    width: 30px;
+    height: 30px;
+    border: none;
+
+
+}
+.BtnContainer{
+    width: 100%;
+    display: grid;
+
+
+}
+.Save{
+    grid-column-start: 7;
+    grid-column-end: 8;
+    max-width: 200px;
+}
+.Back{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: rgb(250, 90, 90);
+    text-decoration: none;
+    grid-row-start: 1;
+    max-width: 200px;
+}
