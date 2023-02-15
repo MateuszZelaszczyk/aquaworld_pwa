@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Navi from "../MainPage/Navi";
 import style from "./AddAqua.module.css";
+import Plus from "../Assets/plus.svg";
+import Delete from "../Assets/delete.svg"
 const MoreInformation = () => {
   const [fish, setFish] = useState([{ fish: { name: "", quantity: 0 } }]);
   const [plants, setPLants] = useState([{ plant: { name: "", quantity: 0 } }]);
@@ -58,12 +60,12 @@ const MoreInformation = () => {
                   onChange={(event) => handleChange(index, event, "f")}
                 />
                 <button type="button" onClick={() => handleRemove(index, "f")}>
-                  Usuń
+                <img src={Delete} alt=""/>
                 </button>
               </div>
             ))}
             <button type="button" onClick={() => handleAdd("f")}>
-              Dodaj nowy gatunek
+            <img src={Plus} alt=""/>
             </button>
           </div>
 
@@ -84,16 +86,18 @@ const MoreInformation = () => {
                   onChange={(event) => handleChange(index, event, "p")}
                 />
                 <button type="button" onClick={() => handleRemove(index, "p")}>
-                  Usuń
+                <img src={Delete} alt=""/>
                 </button>
               </div>
             ))}
             <button type="button" onClick={() => handleAdd("p")}>
-              Dodaj nowy gatunek
+              <img src={Plus} alt=""/>
             </button>
           </div>
         </form>
-        <NavLink className={style.BackBtn} to="/profile/myaqua">Powrót</NavLink>
+        <NavLink className={style.BackBtn} to="/profile/myaqua">
+          Powrót
+        </NavLink>
       </div>
     </div>
   );
