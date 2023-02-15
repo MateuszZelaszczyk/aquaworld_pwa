@@ -3,6 +3,7 @@ import Navi from "../MainPage/Navi";
 import style from "./MyAqua.module.css";
 import Foto from "../Assets/IconFish.png";
 import { NavLink } from "react-router-dom";
+import FormMenu from "./FormMenu/FormMenu.js";
 
 const data = [
   {
@@ -23,7 +24,14 @@ const data = [
   },
 ];
 const MyAqua = () => {
-  return (
+  const [visible, setVisible] = useState(false);
+  const [id, setId] =useState()
+
+  function handleVisibleCl( index) {
+    setVisible(!visible);
+    setId(index);
+  }
+  return ( 
     <div className={style.MainContainer}>
       <Navi />
       <div className={style.AquaContainer}>
@@ -54,15 +62,15 @@ const MyAqua = () => {
             <p className={style.Para4}>{fish.rodzaj}</p>
             <div className={style.BtnContainer}>
               <button className={style.MoreInfoBtn}>Szczegóły</button>
-              <button className={style.MoreBtn}>
-                <NavLink className={style.MoreLink} to={`/profile/myaqua/add_information/${index}`}>
+              <button className={style.MoreBtn} onClick={() => handleVisibleCl(index)}>
                   + Informacje
-                </NavLink>
               </button>
               <button className={style.EditBtn}>Edytuj</button>
               <button className={style.DeleteBtn}>Usuń</button>
             </div>
+            {id===index &&visible && <FormMenu visible={handleVisibleCl} index={id} actual={visible} />}
           </div>
+          
         ))}
       </div>
       <button className={style.BackBtn}>
