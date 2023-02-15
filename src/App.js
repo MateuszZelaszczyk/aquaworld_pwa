@@ -9,7 +9,11 @@ import MainPage from "./MainPage/MainPage.js";
 import NewAqua from "./NewAqua/AddAqua.js";
 import MyAqua from "./MyAqua/MyAqua.js";
 import NewPost from "./AddPost/AddPost.js";
-import MoreInformationAdd from "./NewAqua/MoreInformationsForm.js";
+import AddFish from "./NewAqua/AddFish.js";
+import AddEquipment from "./NewAqua/AddEquipment.js";
+import AddPlants from "./NewAqua/AddPlants.js";
+import AddBase from "./NewAqua/AddBase.js";
+import AddFertilizer from "./NewAqua/AddFertilizer.js";
 const App = () => {
   return (
     <BrowserRouter>
@@ -22,7 +26,11 @@ const App = () => {
         <Route exact path="/profile/mainpage" element={<MainPage/>}/>
         <Route exact path="/profile/newaqua" element={<NewAqua/>}/>
         <Route exact path="/profile/myaqua" element={<MyAqua/>}/>
-        <Route exact path="/profile/myaqua/add_information/:id" element={<MoreInformationAdd/>}/>
+        <Route exact path="/profile/myaqua/add_fish/:id" element={<AddFish/>}/>
+        <Route exact path="/profile/myaqua/add_plants/:id" element={<AddPlants/>}/>
+        <Route exact path="/profile/myaqua/add_base/:id" element={<AddBase/>}/>
+        <Route exact path="/profile/myaqua/add_equipment/:id" element={<AddEquipment/>}/>
+        <Route exact path="/profile/myaqua/add_fertilizer/:id" element={<AddFertilizer/>}/>
         <Route exact path="/profile/newpost" element={<NewPost/>}/>
       </Routes>
     </BrowserRouter>
