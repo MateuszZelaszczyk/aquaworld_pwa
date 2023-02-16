@@ -14,6 +14,7 @@ import AddEquipment from "./NewAqua/AddEquipment.js";
 import AddPlants from "./NewAqua/AddPlants.js";
 import AddBase from "./NewAqua/AddBase.js";
 import AddFertilizer from "./NewAqua/AddFertilizer.js";
+import MoreInformation from "./MoreInformations/MoreInformation.js";
 const App = () => {
   return (
     <BrowserRouter>
@@ -32,6 +33,7 @@ const App = () => {
         <Route exact path="/profile/myaqua/add_equipment/:id" element={<AddEquipment/>}/>
         <Route exact path="/profile/myaqua/add_fertilizer/:id" element={<AddFertilizer/>}/>
         <Route exact path="/profile/newpost" element={<NewPost/>}/>
+        <Route exact path="/profile/myaqua/moreinformations/:id" element={<MoreInformation/>}/>
       </Routes>
     </BrowserRouter>
   );

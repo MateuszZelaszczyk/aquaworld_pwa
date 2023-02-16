@@ -61,7 +61,7 @@ const MyAqua = () => {
             <p className={style.Para3}>{fish.zalozono}</p>
             <p className={style.Para4}>{fish.rodzaj}</p>
             <div className={style.BtnContainer}>
-              <button className={style.MoreInfoBtn}>Szczegóły</button>
+              <button className={style.MoreInfoBtn}><NavLink className={style.Link} to={`/profile/myaqua/moreinformations/${index}`}>Szczegóły</NavLink></button>
               <button className={style.MoreBtn} onClick={() => handleVisibleCl(index)}>
                   + Informacje
               </button>
