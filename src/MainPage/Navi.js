@@ -3,9 +3,17 @@ import style from "./MainPage.module.css";
 import foto from "../Assets/IconFish.png";
 import UserMenu from "./UserMenu/UserMenu";
 import { NavLink } from "react-router-dom";
+import ModalWindow from "./UserWindows/Modal";
+import UserAvatar from "./UserWindows/UserAvatar";
 const Navi = () => {
   const [visible, setVisible] = useState(false);
-
+  const [open, setOpen] = useState(false);
+  const OpenModal = () => {
+    setOpen(!open);
+  };
+  const CloseModal = () => {
+    setOpen(false);
+  };
   function handleVisibleCl() {
     setVisible(!visible);
   }
@@ -24,7 +32,11 @@ const Navi = () => {
               Moje akwaria
             </NavLink>
           </li>
-          <li className={style.ListItem}><NavLink className={style.Link} to="/profile/newpost">+Dodaj post</NavLink></li>
+          <li className={style.ListItem}>
+            <NavLink className={style.Link} to="/profile/newpost">
+              +Dodaj post
+            </NavLink>
+          </li>
           <li className={style.ListItem}>
             <NavLink className={style.Link} to="/profile/newaqua">
               +Dodaj akwarium
@@ -40,7 +52,10 @@ const Navi = () => {
           </li>
         </ul>
       </div>
-      {visible && <UserMenu visible={handleVisibleCl} actual={visible} />}
+      {visible && <UserMenu visible={handleVisibleCl} openModal={OpenModal} actual={visible} />}
+      <ModalWindow openModal={open} closeModal={!open}>
+        <UserAvatar closeModal={CloseModal} />
+      </ModalWindow>
     </nav>
   );
 };
