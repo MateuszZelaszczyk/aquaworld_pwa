@@ -5,14 +5,23 @@ import UserMenu from "./UserMenu/UserMenu";
 import { NavLink } from "react-router-dom";
 import ModalWindow from "./UserWindows/Modal";
 import UserAvatar from "./UserWindows/UserAvatar";
+import EditUser from "./UserWindows/EditProfil";
 const Navi = () => {
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const OpenModal = () => {
     setOpen(!open);
   };
   const CloseModal = () => {
     setOpen(false);
+  };
+
+  const OpenModalEdit = () => {
+    setOpenEdit(!openEdit);
+  };
+  const CloseModalEdit = () => {
+    setOpenEdit(false);
   };
   function handleVisibleCl() {
     setVisible(!visible);
@@ -52,9 +61,12 @@ const Navi = () => {
           </li>
         </ul>
       </div>
-      {visible && <UserMenu visible={handleVisibleCl} openModal={OpenModal} actual={visible} />}
-      <ModalWindow openModal={open} closeModal={!open}>
+      {visible && <UserMenu visible={handleVisibleCl} openModal={OpenModal} openEdit={OpenModalEdit} actual={visible} />}
+      <ModalWindow openModal={open} closeModal={CloseModal} >
         <UserAvatar closeModal={CloseModal} />
+      </ModalWindow>
+      <ModalWindow openModal={openEdit} closeModal={CloseModalEdit} >
+        <EditUser closeModal={CloseModalEdit} />
       </ModalWindow>
     </nav>
   );

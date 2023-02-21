@@ -22,7 +22,7 @@ const UserMenu = (props) => {
      };
   return (
     <div className={style.MenuContainer} ref={refOne}>
-      <button className={style.MenuBtn}>Ustawienia konta</button>
+      <button onClick={()=>props.openEdit()}  className={style.MenuBtn}>Edytuj profil</button>
       <button onClick={()=>props.openModal()} className={style.MenuBtn}>Edytuj/dodaj zdjęcie</button>
       <NavLink to="/" className={style.MenuBtn}>Wyloguj</NavLink>
     </div>
