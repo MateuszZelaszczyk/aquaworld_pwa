@@ -20,14 +20,24 @@ class RegisterPage extends React.Component {
               name="email"
               required
             />
-            <label className={style.RegisterFormLabel} htmlFor="login">
-              Login
+            <label className={style.RegisterFormLabel} htmlFor="name">
+              Imię
             </label>
             <input
               className={style.RegisterFormInput}
               type="text"
-              id="login"
-              name="login"
+              id="name"
+              name="name"
+              required
+            />
+            <label className={style.RegisterFormLabel} htmlFor="lastname">
+              Nazwisko
+            </label>
+            <input
+              className={style.RegisterFormInput}
+              type="text"
+              id="lastname"
+              name="lastname"
               required
             />
             <label className={style.RegisterFormLabel} htmlFor="password">
