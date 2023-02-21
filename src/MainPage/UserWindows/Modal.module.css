@@ -1,8 +1,145 @@
+.MainContainer {
+    width: 100%;
+    background-color:#ffffff;
+    box-shadow:  0 0 4px 1px;
+    padding-left: 10px;
+
+}
+
 .Modal {
     display: flex;
-    width: 700px;
-    min-height: 289px;
+    width: 500px;
+    min-height: 200px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 100px;
+
+}
+.Form{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.Avatar {
+    width: 60px;
+    height: 60px;
+    border:none;
+    outline: none;
+}
+.Empty{
+    width:0;
+    height:0;
+}
+.CloseBtn {
+    background-color: white;
+    border:none;
+
+    cursor: pointer;
+}
+.Describe{
+    margin-right: 10px;
+    line-height: 20px;
+
+}
+.Send,.Back{
+    color: #ffffff;
+    border: none;
+    background-color: #2490CC;
+    cursor: pointer;
+    width: 200px;
+    height:30px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.Back{
+    margin-left: 10px;
+    background-color: rgb(254, 78, 78);
+}
+.NewAvatarFoto{
+    width: 220px;
+    margin-bottom: 15px;
+    margin-top: 7px;
+    outline: none;
+}
+.File {
+    position: relative;
+    display: flex;
+    margin-bottom: 10px;
+    height: 100px;
+  }
+  
+  .File input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    height: 20px;
+  }
+  
+  .File label {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    height: 20px;
+  }
+.HeaderContainer{
+    display: flex;
+    justify-content:space-between;
+    margin-right:10px;
+    margin-top: 5px;
+}
+.LabelGroup{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    width: 400px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    padding: 13px 0;
+
+}
+.TextInput{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 12px;
+    isolation: isolate;
+    width: 450px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+.EditTextLabel{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.6);
+    background: white;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 2px;
+    z-index: 1;
+    text-align: center;
+    padding: 0 10px;
 }
