@@ -16,7 +16,11 @@
     flex-direction: column;
     align-items: center;
 }
-
+@media(max-width:475px){
+    .LogInContainer{
+        max-width: 90vw;
+    }
+}
 .LogInHeader {
     width: 100%;
     height: 50px;
@@ -103,6 +107,21 @@
     position: absolute;
     grid-column-start: 2;
     width: 169px;
-    right:22px;
-    margin-top:52px
+    right: 22px;
+    margin-top: 52px
+}
+@media(max-width:475px){
+    .Link_btn_Container {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .LogInResetLink,.LogInFormLink{
+        width:100%;
+        display: block;
+        position: unset;
+        margin-top: 20px;
+        text-align: center;
+    }
 }
