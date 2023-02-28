@@ -241,3 +241,8 @@ input:focus {
 .BackBtn {
     margin-bottom: 10px;
 }
+@media(max-width:500px){
+    .NewAquaContainer, .NewFishContainer, .NewPlantsContainer, .NewEquipContainer, .NewBaseContainer, .NewFertContainer {
+        width: 100vw
+    }
+}
