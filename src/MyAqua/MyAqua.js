@@ -25,18 +25,18 @@ const data = [
 ];
 const MyAqua = () => {
   const [visible, setVisible] = useState(false);
-  const [id, setId] =useState()
+  const [id, setId] = useState();
 
-  function handleVisibleCl( index) {
+  function handleVisibleCl(index) {
     setVisible(!visible);
     setId(index);
   }
-  return ( 
+  return (
     <div className={style.MainContainer}>
-      <Navi show={'none'} />
+      <Navi show={"none"} />
       <div className={style.AquaContainer}>
         <div className={style.HeadContainer}>
-          <p className={style.Head1}>Zdjęcie</p>
+          <p className={style.Head1}></p>
           <p className={style.Head2}>Nazwa</p>
           <p className={style.Head3}>Pojmeność (l)</p>
           <p className={style.Head4}>Wymiary (cm)</p>
@@ -46,9 +46,13 @@ const MyAqua = () => {
         </div>
         {data.map((fish, index) => (
           <div key={index} className={style.ItemContainer}>
+            <p className={style.Head}></p>
             <img className={style.AquaFoto} alt="" src={fish.zdjecie} />
+            <p className={style.Head}>Nazwa:</p>
             <p className={style.Para1}>{fish.name}</p>
+            <p className={style.Head}>Pojmeność (l):</p>
             <p className={style.Para2}>{fish.pojemnosc}</p>
+            <p className={style.Head}>Wymiary (cm):</p>
             <div className={style.SizeContainer}>
               {fish.wymiary.map((size, ind) => (
                 <div className={style.Size} key={ind}>
@@ -58,19 +62,32 @@ const MyAqua = () => {
                 </div>
               ))}
             </div>
+            <p className={style.Head}>Data założenia:</p>
             <p className={style.Para3}>{fish.zalozono}</p>
+            <p className={style.Head}>Rodzaj:</p>
             <p className={style.Para4}>{fish.rodzaj}</p>
             <div className={style.BtnContainer}>
-              <button className={style.MoreInfoBtn}><NavLink className={style.Link} to={`/profile/myaqua/moreinformations/${index}`}>Szczegóły</NavLink></button>
-              <button className={style.MoreBtn} onClick={() => handleVisibleCl(index)}>
-                  + Informacje
+              <button className={style.MoreInfoBtn}>
+                <NavLink
+                  className={style.Link}
+                  to={`/profile/myaqua/moreinformations/${index}`}
+                >
+                  Szczegóły
+                </NavLink>
+              </button>
+              <button
+                className={style.MoreBtn}
+                onClick={() => handleVisibleCl(index)}
+              >
+                + Informacje
               </button>
               <button className={style.EditBtn}>Edytuj</button>
               <button className={style.DeleteBtn}>Usuń</button>
             </div>
-            {id===index &&visible && <FormMenu visible={handleVisibleCl} index={id} actual={visible} />}
+            {id === index && visible && (
+              <FormMenu visible={handleVisibleCl} index={id} actual={visible} />
+            )}
           </div>
-          
         ))}
       </div>
       <button className={style.BackBtn}>

@@ -1,143 +1,216 @@
 .AquaContainer {
-    width: 85%;
+    width: 95%;
     margin-top: 20px;
     display: grid;
-    grid-template-columns:13% 12% 10% 20% 15% 12% 18%;
+    grid-template-columns: 13% 12% 10% 15% 15% 12% 23%;
     margin-left: auto;
     margin-right: auto;
-    box-shadow:0 0 4px 1px; 
+    box-shadow: 0 0 4px 1px;
 }
 
 .ItemContainer {
 
     display: grid;
-    grid-template-columns:13% 12% 10% 20% 15% 12% 18%;
-    grid-column-start: 1 ;
-    grid-column-end:8;
+    grid-template-columns: 13% 12% 10% 15% 15% 12% 23%;
+    grid-column-start: 1;
+    grid-column-end: 8;
     margin-top: 10px;
     border-bottom: 1px solid black;
-    
+
 
 }
 
 .HeadContainer {
-    grid-column-start: 1 ;
-    grid-column-end:8;
+    grid-column-start: 1;
+    grid-column-end: 8;
     display: grid;
-    grid-template-columns:13% 12% 10% 20% 15% 12% 18%;
+    grid-template-columns: 13% 12% 10% 15% 15% 12% 23%;
     border-bottom: 1px solid black;
-    height:30px;
-    background-color:lightblue;
+    height: 30px;
+    background-color: lightblue;
     font-family: 'Inter';
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
-    
+
 }
+
 .BtnContainer {
     display: grid;
-    grid-template-columns:50% 50%;
+    grid-template-columns: 50% 50%;
 
 
 }
 
-.BackBtn{
-    width:200px;
+.BackBtn {
+    width: 200px;
     margin-left: 7.5%;
-    margin-top:20px;
+    margin-top: 20px;
     border: none;
     border-radius: 0;
     height: 30px;
-    font-size:18px;
+    font-size: 18px;
     cursor: pointer;
     background-color: white;
     box-shadow: 0 0 4px 1px;
 
 }
-.Head1, .AquaFoto{
+
+.Head1, .AquaFoto {
     grid-column-start: 1;
-    grid-column-end:2;
-    width:60px;
-    height:60px;
+    grid-column-end: 2;
+    width: 60px;
+    height: 60px;
     margin-left: 5px;
 
 }
+
 .Head2, .Para1 {
     grid-column-start: 2;
-    grid-column-end:3;
+    grid-column-end: 3;
 
 }
+
 .Head3, .Para2 {
     grid-column-start: 3;
-    grid-column-end:4;
+    grid-column-end: 4;
 
 }
+
 .Head4, .Size {
     grid-column-start: 4;
-    grid-column-end:5;
+    grid-column-end: 5;
 
 }
+
 .Head5, .Para3 {
     grid-column-start: 5;
-    grid-column-end:6;
+    grid-column-end: 6;
 
 }
+
 .Head6, .Para4 {
     grid-column-start: 6;
-    grid-column-end:7;
+    grid-column-end: 7;
 
 }
+
 .Head7, .BtnContainer {
     grid-column-start: 7;
-    grid-column-end:8;
+    grid-column-end: 8;
 
 }
-.MoreInfoBtn, .MoreBtn, .EditBtn, .DeleteBtn{
+
+.MoreInfoBtn, .MoreBtn, .EditBtn, .DeleteBtn {
     border-radius: 0;
-    border:none;
-    margin-top:4px;
-    height:20px;
+    border: none;
+    margin-top: 4px;
+    height: 20px;
     cursor: pointer;
     color: rgb(27, 27, 27);
     font-weight: bold;
-    width:90px;
+    width: 90px;
     background-color: white;
-    box-shadow:  0 0 2px 1px;
-    margin-left:2px;
+    box-shadow: 0 0 2px 1px;
+    margin-left: 2px;
 }
-.EditBtn, .DeleteBtn{
-    width:90px;
+
+.EditBtn, .DeleteBtn {
+    width: 90px;
 }
-.MoreInfoBtn{
+
+.MoreInfoBtn {
     grid-column-start: 1;
-    grid-column-end:2;
+    grid-column-end: 2;
 }
-.MoreBtn{
+
+.MoreBtn {
     grid-column-start: 2;
-    grid-column-end:3;
+    grid-column-end: 3;
 
 }
-.EditBtn{
-    grid-column-start:1;
-    grid-column-end:2;
+
+.EditBtn {
+    grid-column-start: 1;
+    grid-column-end: 2;
 
 }
-.DeleteBtn{
-    grid-column-start:2;
-    grid-column-end:3;
+
+.DeleteBtn {
+    grid-column-start: 2;
+    grid-column-end: 3;
 
 }
-.MoreLink{
+
+.MoreLink {
     text-decoration: none;
     color: #000000;
     display: block;
     width: 100%;
     height: 100%;
 }
-.Link{
-    display:block;
+
+.Link {
+    display: block;
     width: 100%;
     height: 100%;
     color: #000000;
     text-decoration: none;
+}
+
+.Head {
+    display: none;
+}
+
+@media(max-width:800px) {
+    .AquaContainer {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .ItemContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding-bottom: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .Head {
+        display: block;
+        grid-column-start: 1;
+        grid-column-end: 2;
+        margin-bottom: 5px;
+    }
+
+    .HeadContainer {
+        display: none;
+
+    }
+
+    .BtnContainer {
+     grid-column-start:1;
+     grid-column-end: 3;
+
+    }
+    .SizeContainer{
+        margin-bottom: 5px;
+        
+    }
+    .Size{
+        display: flex;
+        flex-direction: row;
+    }
+    .SizeParagraph{
+        margin-right: 5px;
+    }
+.Para1, .Para2, .Para3, .Para4{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    margin-bottom:5px;
+}
+
+
 }
