@@ -72,3 +72,40 @@ p{
     justify-items: center;
     cursor: pointer;
 }
+@media(max-width:800px){
+    .InfoContainer{
+        width:100vw;
+        margin-top:15px;
+        box-shadow:  0 0 0 0;
+        border-radius: 0;
+        margin-bottom: 0;
+    }
+    .Container{
+        margin-left: 0px;
+       
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+    }
+    .FertilizerContainer{
+        border-right: 1px solid black;
+    }
+    .FishContainer, .PlantsContainer{
+        border-bottom: 1px solid black;
+        margin-left: 0;
+        padding-left: 10px;
+    }
+}
+@media(max-width:600px){
+    .Container{
+        grid-template-columns: 1fr;
+    }
+}
+@media(max-width:500px){
+    .BaseInformation{
+        display: flex;
+        height: auto;
+    }
+    .Link{
+        margin-left: 15px;
+    }
+}
