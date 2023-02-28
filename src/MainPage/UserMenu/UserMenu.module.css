@@ -28,6 +28,7 @@
     .MenuContainer{
         top: 50px;
         right: 5px;
+        width: 160px;
     }
     .MenuBtn{
         color: #2063ffa9;
