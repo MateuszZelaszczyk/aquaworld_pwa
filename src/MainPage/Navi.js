@@ -6,7 +6,10 @@ import { NavLink } from "react-router-dom";
 import ModalWindow from "./UserWindows/Modal";
 import UserAvatar from "./UserWindows/UserAvatar";
 import EditUser from "./UserWindows/EditProfil";
-const Navi = () => {
+import menu from "../Assets/menu.svg";
+import search from "../Assets/search.svg"
+import users from "../Assets/users.svg"
+const Navi = (props) => {
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
@@ -26,16 +29,34 @@ const Navi = () => {
   function handleVisibleCl() {
     setVisible(!visible);
   }
+
+  const [ismobile, setIsMobile]=useState(false);
+  const openNavi =()=>{
+    setIsMobile(!ismobile);
+  }
+  const [mobileSearch, setMobileSearch] = useState(false)
+  const openSearch = ()=>{
+    setMobileSearch(!mobileSearch);
+  }
+
   return (
     <nav className={style.MainNaviContainer}>
       <div className={style.MainNaviMenu}>
         <NavLink to="/profile/mainpage" className={style.LogoContainer}>
+
           <p className={style.Logo}>AquaWorld</p>{" "}
           <img className={style.Foto} src={foto} alt="user" />
         </NavLink>
+        <button className={style.SearchBtn} onClick={openSearch}>
+          <img alt="" src={search} />
+        </button>
+        <input className={ mobileSearch?style.MobileSearch: style.Search} type="text" placeholder="Wyszukaj..." />
+        <button style={{display:props.show}} className={style.SideBtn} onClick={props.Colap}><img alt="" src={users} /></button>
+        <button className={style.HamMenu} onClick={openNavi}>
+          <img alt="" src={menu} />
+        </button>
 
-        <input className={style.Search} type="text" placeholder="Wyszukaj..." />
-        <ul className={style.ElementsList}>
+        <ul className={ismobile? style.MobileNavi: style.ElementsList}>
           <li className={style.ListItem}>
             <NavLink className={style.Link} to="/profile/myaqua">
               Moje akwaria
@@ -61,11 +82,18 @@ const Navi = () => {
           </li>
         </ul>
       </div>
-      {visible && <UserMenu visible={handleVisibleCl} openModal={OpenModal} openEdit={OpenModalEdit} actual={visible} />}
-      <ModalWindow openModal={open} closeModal={CloseModal} >
+      {visible && (
+        <UserMenu
+          visible={handleVisibleCl}
+          openModal={OpenModal}
+          openEdit={OpenModalEdit}
+          actual={visible}
+        />
+      )}
+      <ModalWindow openModal={open} closeModal={CloseModal}>
         <UserAvatar closeModal={CloseModal} />
       </ModalWindow>
-      <ModalWindow openModal={openEdit} closeModal={CloseModalEdit} >
+      <ModalWindow openModal={openEdit} closeModal={CloseModalEdit}>
         <EditUser closeModal={CloseModalEdit} />
       </ModalWindow>
     </nav>

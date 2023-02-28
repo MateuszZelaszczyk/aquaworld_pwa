@@ -33,7 +33,7 @@ const MyAqua = () => {
   }
   return ( 
     <div className={style.MainContainer}>
-      <Navi />
+      <Navi show={'none'} />
       <div className={style.AquaContainer}>
         <div className={style.HeadContainer}>
           <p className={style.Head1}>Zdjęcie</p>

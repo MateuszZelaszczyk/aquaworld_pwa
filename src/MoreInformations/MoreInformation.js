@@ -51,7 +51,7 @@ const data = [
 const MoreInformation = () => {
   return (
     <div className={style.MainContainer}>
-      <Navi />
+      <Navi show={'none'}  />
       <div className={style.InfoContainer}>
         {data.map((item, index) => (
           <div key={index} className={style.ItemContainer}>

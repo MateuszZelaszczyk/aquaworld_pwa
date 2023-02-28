@@ -24,7 +24,7 @@ const AddFertilizer = () => {
   };
   return (
     <div>
-      <Navi />
+      <Navi show={'none'}  />
       <div className={style.NewFertContainer}>
         <h1 className={style.NewAquaHeader}>Dodaj nawóz</h1>
         <form className={style.NewAquaForm}>

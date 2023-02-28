@@ -6,7 +6,7 @@ const AddEquipment = () => {
 
   return (
     <div>
-      <Navi />
+      <Navi show={'none'}  />
       <div className={style.NewEquipContainer}>
         <h1 className={style.NewAquaHeader}>Uzupełnij wyposażenie</h1>
         <form className={style.NewAquaForm}>

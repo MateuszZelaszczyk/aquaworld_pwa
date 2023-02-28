@@ -22,7 +22,7 @@ const AddPlants = () => {
   };
   return (
     <div>
-      <Navi />
+      <Navi show={'none'} />
       <div className={style.NewPlantsContainer}>
         <h1 className={style.NewAquaHeader}>Czas na nowe rośliny</h1>
         <form className={style.NewAquaForm}>

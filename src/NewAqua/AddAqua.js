@@ -18,7 +18,7 @@ const NewAqua = () => {
 
   return (
     <div>
-      <Navi />
+      <Navi show={'none'}  />
       <div className={style.NewAquaContainer}>
         <h1 className={style.NewAquaHeader}>Dodaj akwarium</h1>
         <form className={style.NewAquaForm}>

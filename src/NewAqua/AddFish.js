@@ -22,7 +22,7 @@ const AddFish = () => {
   };
   return (
     <div>
-      <Navi />
+      <Navi show={'none'} />
       <div className={style.NewFishContainer}>
         <h1 className={style.NewAquaHeader}>Czas na nowe ryby</h1>
         <form className={style.NewAquaForm}>

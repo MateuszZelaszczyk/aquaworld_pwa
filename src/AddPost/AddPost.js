@@ -22,7 +22,7 @@ const NewPost = () => {
   };
   return (
     <div>
-      <Navi />
+      <Navi show={'none'} />
       <div className={style.NewPostContainer}>
         <h1 className={style.NewPostHeader}>Nowy post</h1>
         <form className={style.PostForm}>

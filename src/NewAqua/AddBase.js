@@ -7,7 +7,7 @@ const AddBase = () => {
 
   return (
     <div>
-      <Navi />
+      <Navi show={'none'}  />
       <div className={style.NewBaseContainer}>
         <h1 className={style.NewAquaHeader}>Jakie masz podłoże</h1>
         <form className={style.NewAquaForm}>
