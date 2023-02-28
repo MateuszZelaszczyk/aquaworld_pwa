@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import style from "./MainPage.module.css";
 import foto from "../Assets/IconFish.png";
 import UserMenu from "./UserMenu/UserMenu";
@@ -38,7 +38,25 @@ const Navi = (props) => {
   const openSearch = ()=>{
     setMobileSearch(!mobileSearch);
   }
+  
 
+  const refOne = useRef();
+  useEffect(() => {
+     document.addEventListener('click', handleClickOutside, true);
+  }, []);
+  const handleClickOutside = (e) => {
+     if (refOne.current !== null) {
+        if (refOne.current &&!refOne.current.contains(e.target)) {
+          setIsMobile(false)
+        }
+        else{
+           setTimeout(()=>{
+            setIsMobile(!ismobile)
+           },100)
+           
+        }
+     }
+  };
   return (
     <nav className={style.MainNaviContainer}>
       <div className={style.MainNaviMenu}>
@@ -56,7 +74,7 @@ const Navi = (props) => {
           <img alt="" src={menu} />
         </button>
 
-        <ul className={ismobile? style.MobileNavi: style.ElementsList}>
+        <ul ref={ismobile? refOne:null} className={ismobile? style.MobileNavi: style.ElementsList}>
           <li className={style.ListItem}>
             <NavLink className={style.Link} to="/profile/myaqua">
               Moje akwaria

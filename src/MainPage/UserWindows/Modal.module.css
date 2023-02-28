@@ -143,3 +143,33 @@
     text-align: center;
     padding: 0 10px;
 }
+@media(max-width:500px){
+    .Modal{
+        width:100vw;
+        margin-top: 20px;
+ 
+    }
+    .MainContainer{
+        max-height: 300px;
+        margin-top: 20px;
+        overflow-y:auto;
+    }
+    .TextInput{
+        width:95vw;
+        border-top: none;
+    
+    }
+    .LabelGroup{
+        width:100vw;
+    }
+    .Back{
+        margin-left: 0px;
+    }
+    .EditTextLabel{
+        display: block;
+        position: relative;
+        background-color: #ffffff;
+        z-index: 2;
+    }
+
+}
