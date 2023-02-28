@@ -24,3 +24,12 @@
     text-decoration: none;
     color: #000000;
 }
+@media(max-width:800px){
+    .MenuContainer{
+        right: 150px;
+        top:140px;
+    }
+    .MenuBtn{
+        color: #2063ffa9;
+    }
+}

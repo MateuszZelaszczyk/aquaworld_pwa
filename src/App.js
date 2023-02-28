@@ -15,6 +15,7 @@ import AddPlants from "./NewAqua/AddPlants.js";
 import AddBase from "./NewAqua/AddBase.js";
 import AddFertilizer from "./NewAqua/AddFertilizer.js";
 import MoreInformation from "./MoreInformations/MoreInformation.js";
+import { ProSidebarProvider } from "react-pro-sidebar";
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,7 +25,7 @@ const App = () => {
         <Route exact path="/register" element={<RegisterPage/>}/>
         <Route exact path="/repassword" element={<RePassword/>}/>
         <Route exact path="/newpassword" element={<NewPassword/>}/>
-        <Route exact path="/profile/mainpage" element={<MainPage/>}/>
+        <Route exact path="/profile/mainpage" element={<ProSidebarProvider><MainPage/></ProSidebarProvider>}/>
         <Route exact path="/profile/newaqua" element={<NewAqua/>}/>
         <Route exact path="/profile/myaqua" element={<MyAqua/>}/>
         <Route exact path="/profile/myaqua/add_fish/:id" element={<AddFish/>}/>
