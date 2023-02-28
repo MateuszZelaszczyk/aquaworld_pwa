@@ -26,8 +26,8 @@
 }
 @media(max-width:800px){
     .MenuContainer{
-        right: 150px;
-        top:140px;
+        top: 50px;
+        right: 5px;
     }
     .MenuBtn{
         color: #2063ffa9;

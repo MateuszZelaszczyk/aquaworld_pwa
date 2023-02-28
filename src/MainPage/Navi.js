@@ -33,6 +33,7 @@ const Navi = (props) => {
   const [ismobile, setIsMobile]=useState(false);
   const openNavi =()=>{
     setIsMobile(!ismobile);
+
   }
   const [mobileSearch, setMobileSearch] = useState(false)
   const openSearch = ()=>{
@@ -40,27 +41,11 @@ const Navi = (props) => {
   }
   
 
-  const refOne = useRef();
-  useEffect(() => {
-     document.addEventListener('click', handleClickOutside, true);
-  }, []);
-  const handleClickOutside = (e) => {
-     if (refOne.current !== null) {
-        if (refOne.current &&!refOne.current.contains(e.target)) {
-          setIsMobile(false)
-        }
-        else{
-           setTimeout(()=>{
-            setIsMobile(!ismobile)
-           },100)
-           
-        }
-     }
-  };
+
   return (
-    <nav className={style.MainNaviContainer}>
+    <nav className={style.MainNaviContainer} >
       <div className={style.MainNaviMenu}>
-        <NavLink to="/profile/mainpage" className={style.LogoContainer}>
+        <NavLink to="/profile/mainpage" className={style.LogoContainer}  >
 
           <p className={style.Logo}>AquaWorld</p>{" "}
           <img className={style.Foto} src={foto} alt="user" />
@@ -74,7 +59,7 @@ const Navi = (props) => {
           <img alt="" src={menu} />
         </button>
 
-        <ul ref={ismobile? refOne:null} className={ismobile? style.MobileNavi: style.ElementsList}>
+    <ul className={ismobile? style.MobileNavi: style.ElementsList}>
           <li className={style.ListItem}>
             <NavLink className={style.Link} to="/profile/myaqua">
               Moje akwaria
@@ -93,7 +78,7 @@ const Navi = (props) => {
           <li className={style.ListItem}>
             <button
               className={style.ProfilContainer}
-              onClick={() => setVisible(!visible)}
+              onClick={() => [setVisible(!visible), setIsMobile()]}
             >
               Profil <img className={style.Foto} src={foto} alt="user" />
             </button>
