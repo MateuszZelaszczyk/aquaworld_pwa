@@ -1,27 +1,64 @@
 import React, { useState } from "react";
 import Navi from "../MainPage/Navi";
 import style from "./AddAqua.module.css";
-import styleField from "../AddPost/AddPost.module.css"
+import styleField from "../AddPost/AddPost.module.css";
 import Avatar from "../Assets/Avatar.png";
 import { NavLink } from "react-router-dom";
-
+import axios from "axios";
 const NewAqua = () => {
   //const avatarUrl = UserAvatar;
   const [avatarShow, setAvatarShow] = useState(null);
-  const [avatarURL, setAvatarURL] = useState(Avatar);
+  const [image, setImage] = useState(Avatar);
+  const email = "matesz.zywy@wp.pl";
+  const [name, setName] = useState("");
+  const [capacity, setCapacity] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [length, setLength] = useState(0);
+  const [depth, setDepth] = useState(0);
+  const [type, setType] = useState("");
+  const [startDate, setStartDate] = useState("");
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      email,
+      name,
+      capacity,
+      height,
+      length,
+      depth,
+      type,
+      startDate,
+      image: image,
+    };
+    axios
+      .post("http://localhost:8000/api/aquariums/", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setName("");
+        setCapacity(0);
+        setHeight(0);
+        setLength(0);
+        setDepth(0);
+        setStartDate("");
+        setType("");
+      });
+  };
   const update = (e) => {
-    setAvatarURL(e.target.files[0]);
+    setImage(e.target.files[0]);
     var file = e.target.files[0];
     const objectURL = URL.createObjectURL(file);
     setAvatarShow(objectURL);
   };
-
   return (
     <div>
-      <Navi show={'none'}  />
+      <Navi show={"none"} />
       <div className={style.NewAquaContainer}>
         <h1 className={style.NewAquaHeader}>Dodaj akwarium</h1>
-        <form className={style.NewAquaForm}>
+        <form className={style.NewAquaForm} onSubmit={handleSubmit}>
           <label className={style.NewAquaFormLabel} htmlFor="name">
             Nazwa
           </label>
@@ -30,6 +67,8 @@ const NewAqua = () => {
             type="text"
             id="name"
             name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
           <label className={style.NewAquaFormLabel} htmlFor="capacity">
@@ -40,6 +79,8 @@ const NewAqua = () => {
             type="number"
             id="capacity"
             name="capacity"
+            value={capacity}
+            onChange={(e) => setCapacity(e.target.value)}
             required
           />
           <div className={style.SizeContainer}>
@@ -53,6 +94,8 @@ const NewAqua = () => {
                 type="number"
                 id="width"
                 name="width"
+                value={length}
+                onChange={(e) => setLength(e.target.value)}
                 required
               />
             </div>
@@ -65,6 +108,8 @@ const NewAqua = () => {
                 type="number"
                 id="height"
                 name="height"
+                value={height}
+                onChange={(e) => setHeight(e.target.value)}
                 required
               />
             </div>
@@ -77,6 +122,8 @@ const NewAqua = () => {
                 type="number"
                 id="depth"
                 name="depth"
+                value={depth}
+                onChange={(e) => setDepth(e.target.value)}
                 required
               />
             </div>
@@ -89,38 +136,30 @@ const NewAqua = () => {
             type="date"
             id="start"
             name="start"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
             required
           />
-          <div className={style.AquaTypeContainer}>
-            <legend className={style.TypeLegend}>Rodzaj</legend>
-            <div className={style.RadioContainer}>
-              <label className={style.NewAquaFormLabel} htmlFor="sweet">
-                Słodkowodne
-              </label>
-              <input
-                className={style.NewAquaType}
-                type="radio"
-                id="sweet"
-                name="type"
-                value="sweet"
-              />
-            </div>
-            <div className={style.RadioContainer}>
-              <label className={style.NewAquaFormLabel} htmlFor="salt">
-                Słonowodne
-              </label>
-              <input
-                className={style.NewAquaType}
-                type="radio"
-                id="salt"
-                name="type"
-                value="salt"
-              />
-            </div>
-          </div>
+
+          <select
+            className={style.AquaTypeContainer}
+            name="type"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            required
+          >
+            <option></option>
+            <option className={style.NewAquaType} value="słodkowodne">
+              Słodkowodne
+            </option>
+
+            <option className={style.NewAquaType} value="słonowodne">
+              Słonowodne
+            </option>
+          </select>
 
           <div className={styleField.File}>
-              <label htmlFor="foto">Wybierz zdjęcie</label>
+            <label htmlFor="foto">Wybierz zdjęcie</label>
             <input
               className={styleField.NewAquaFoto}
               type="file"
@@ -132,8 +171,14 @@ const NewAqua = () => {
             <img className={style.Avatar} src={avatarShow} alt=""></img>
           </div>
           <div className={style.BtnContainer}>
-            <button className={style.Back}><NavLink to="/profile/mainpage" className={style.BackLink}>Anuluj</NavLink></button>
-            <button type="submit" className={style.Save}>Zapisz</button>
+            <button className={style.Back}>
+              <NavLink to="/profile/mainpage" className={style.BackLink}>
+                Anuluj
+              </NavLink>
+            </button>
+            <button type="submit" className={style.Save}>
+              Zapisz
+            </button>
           </div>
         </form>
       </div>
