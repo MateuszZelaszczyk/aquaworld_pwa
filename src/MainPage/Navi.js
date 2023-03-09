@@ -2,17 +2,25 @@ import React, { useState, useEffect, useRef } from "react";
 import style from "./MainPage.module.css";
 import foto from "../Assets/IconFish.png";
 import UserMenu from "./UserMenu/UserMenu";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ModalWindow from "./UserWindows/Modal";
 import UserAvatar from "./UserWindows/UserAvatar";
 import EditUser from "./UserWindows/EditProfil";
 import menu from "../Assets/menu.svg";
-import search from "../Assets/search.svg"
-import users from "../Assets/users.svg"
-const Navi = (props) => {
+import search from "../Assets/search.svg";
+import users from "../Assets/users.svg";
+import { logout } from "../Actions/auth.js";
+import { connect } from "react-redux";;
+const Navi = ({isAuthenticated,logout,...props}) => {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  useEffect(() => {
+    if (isAuthenticated===false) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
   const OpenModal = () => {
     setOpen(!open);
   };
@@ -103,4 +111,8 @@ const Navi = (props) => {
   );
 };
 
-export default Navi;
+const mapSatateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapSatateToProps, { logout })(Navi);

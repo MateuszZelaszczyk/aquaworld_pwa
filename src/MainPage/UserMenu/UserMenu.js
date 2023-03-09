@@ -1,8 +1,10 @@
 import React, {useEffect, useRef} from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import style from "./UserMenu.module.css";
-const UserMenu = (props) => {
-  
+import { logout } from "../../Actions/auth.js"
+import { connect } from "react-redux";
+const UserMenu = ({logout, isAuthenticated, ...props}) => {
+     const navigate = useNavigate();
      const refOne = useRef();
      useEffect(() => {
         document.addEventListener('click', handleClickOutside, true);
@@ -20,12 +22,22 @@ const UserMenu = (props) => {
            }
         }
      };
+     useEffect(() => {
+      if (isAuthenticated===false) {
+        navigate("/");
+      }
+    }, [isAuthenticated, navigate]);
+     
   return (
     <div className={style.MenuContainer} ref={refOne}>
       <button onClick={()=>props.openEdit()}  className={style.MenuBtn}>Edytuj profil</button>
       <button onClick={()=>props.openModal()} className={style.MenuBtn}>Edytuj/dodaj zdjęcie</button>
-      <NavLink to="/" className={style.MenuBtn}>Wyloguj</NavLink>
+      <NavLink to="/#!" className={style.MenuBtn}><button onClick={logout}>Wyloguj</button></NavLink>
     </div>
   );
 };
-export default UserMenu;
+const mapSatateToProps = (state) => ({
+   isAuthenticated: state.auth.isAuthenticated,
+ });
+ 
+ export default connect(mapSatateToProps, { logout })(UserMenu);

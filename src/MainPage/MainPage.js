@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./MainPage.module.css";
 import Navi from "./Navi";
 import Avatar from "../Assets/Avatar.png";
 import foto from "../Assets/Fish.jpg";
 import send from "../Assets/send.svg";
-
-import { Sidebar, Menu, useProSidebar } from "react-pro-sidebar";
+import axios from "axios";
+import { Sidebar, Menu} from "react-pro-sidebar";
 import Users from "./Users";
 const data = [
   {
@@ -83,6 +83,15 @@ const MainPage = () => {
   const Collaps = () => {
     setCollapse(!collapseSidebar);
   };
+
+  const [data, setData] = useState([]);
+  const getData= async()=>{
+    const response =await axios.get("http://localhost:8000/api/posts/");
+    setData(response.data)
+  }
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div>
       <Navi Colap={Collaps} show='flexible' />
@@ -115,7 +124,7 @@ const MainPage = () => {
                   className={style.AddComment}
                 />
                 <button className={style.AddCommentBtn}>
-                  {" "}
+
                   Dodaj <img alt="" src={send} />
                 </button>
               </div>
