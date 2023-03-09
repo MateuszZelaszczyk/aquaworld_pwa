@@ -1,15 +1,38 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import style from "./LogIn.module.css";
 import NaviBar from "../HomePage/NaviBarHome.js";
 import { NavLink } from "react-router-dom";
-class LogInPage extends React.Component {
-  render() {
+import { connect } from "react-redux";
+import { login } from "../Actions/auth";
+import { useCookies } from 'react-cookie';
+const LogInPage =({ login, isAuthenticated })=>{
+  const navigate =useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const { email, password } = formData;
+  const [cookies, setCookie] = useCookies(['login']);
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onSubmit = e => {
+    e.preventDefault();
+    login(email, password);
+    setCookie('login', email, { path: '/' })
+   
+  };
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/profile/mainpage");
+    }
+  }, [isAuthenticated, navigate]);
     return (
       <div className={style.LogInWindow}>
         <NaviBar />
         <div className={style.LogInContainer}>
           <h1 className={style.LogInHeader}>Zaloguj się</h1>
-          <form className={style.LogInForm}>
+          <form className={style.LogInForm} onSubmit={e => onSubmit(e)}>
             <label className={style.LogInFormLabel} htmlFor="email">
               Email
             </label>
@@ -18,6 +41,8 @@ class LogInPage extends React.Component {
               type="email"
               id="email"
               name="email"
+              value={email}
+              onChange={e => onChange(e)}
               required
             />
             <label className={style.LogInFormLabel} htmlFor="password">
@@ -28,12 +53,12 @@ class LogInPage extends React.Component {
               type="password"
               id="password"
               name="password"
+              value={password}
+              onChange={e => onChange(e)}
               required
             />
             <div className={style.Link_btn_Container}>
-              <NavLink className={style.LogInFormBtn} to="/profile/mainpage">
                 <button className={style.LogInFormBtn}>Zaloguj się</button>
-              </NavLink>
               <NavLink className={style.LogInFormLink} to="/register">
                 <p>Nie masz konta? Zarejestruj się</p>
               </NavLink>
@@ -46,5 +71,8 @@ class LogInPage extends React.Component {
       </div>
     );
   }
-}
-export default LogInPage;
+  const mapStateToProps =state =>({
+    isAuthenticated: state.auth.isAuthenticated
+    
+  });
+export default connect(mapStateToProps, { login })(LogInPage);

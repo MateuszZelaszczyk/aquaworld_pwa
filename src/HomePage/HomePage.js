@@ -3,7 +3,9 @@ import style from "./HomePage.module.css";
 import NaviBar from "./NaviBarHome.js";
 import Fish from "../Assets/Fish.jpg";
 import Icon from "../Assets/TalkFish.png";
-const HomePage = () => {
+import { logout } from "../Actions/auth";
+import { connect } from "react-redux";
+const HomePage = ({logout, isAuthenticated}) => {
   return (
     <div className={style.MainWindow}>
       <NaviBar />
@@ -26,4 +28,8 @@ const HomePage = () => {
     </div>
   );
 };
-export default HomePage;
+const mapSatateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+export default connect(mapSatateToProps, { logout })(HomePage);
+

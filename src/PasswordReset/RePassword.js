@@ -1,15 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import style from "./RePassword.module.css";
 import NaviBar from "../HomePage/NaviBarHome.js";
 import { NavLink } from "react-router-dom";
-class RePassword extends React.Component {
-  render() {
+import { connect } from "react-redux";
+import { reset_password } from "../Actions/auth";
+const RePassword = ({ reset_password }) => {
+  const [requestSent, setRequestSent] = useState(false)
+  const [formData, setFormData] = useState({
+    email: "",
+  });
+  const { email} = formData;
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onSubmit = e => {
+    e.preventDefault();
+    reset_password(email);
+    setRequestSent(true);
+   
+  };
+  if(requestSent){ 
+    return <NavLink to="/"/> 
+  }
     return (
       <div className={style.RePasswordWindow}>
         <NaviBar />
         <div className={style.RePasswordContainer}>
           <h1 className={style.RePasswordHeader}>Zmień hasło</h1>
-          <form className={style.RePasswordForm}>
+          <form className={style.RePasswordForm} onSubmit={e=>onSubmit(e)}>
             <label
               className={style.RePasswordFormLabel}
               htmlFor="email"
@@ -20,6 +37,8 @@ class RePassword extends React.Component {
               id="email"
               name="email"
               placeholder="Podaj email swojego konta..."
+              value={email}
+              onChange={e => onChange(e)}
               required
             />
             <div className={style.BtnContainer}>
@@ -34,5 +53,4 @@ class RePassword extends React.Component {
       </div>
     );
   }
-}
-export default RePassword;
+  export default connect(null, { reset_password })(RePassword);

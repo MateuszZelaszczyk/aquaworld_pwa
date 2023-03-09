@@ -1,15 +1,47 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import style from "./RegisterPage.module.css";
 import NaviBar from "../HomePage/NaviBarHome.js";
-import { NavLink } from "react-router-dom";
-class RegisterPage extends React.Component {
-  render() {
+import { NavLink, useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import {register} from "../Actions/auth";
+const RegisterPage =({register, isAuthenticated})=> {
+  const navigate = useNavigate();
+  const[ accountCr, setAccountCr]= useState(false)
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    re_password: "",
+  });
+  const { firstname, lastname, email, password, re_password } = formData;
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (password === re_password) {
+      register(firstname, lastname, email, password, re_password);
+      setAccountCr(true);
+
+    }
+
+      if (isAuthenticated) {
+        navigate("/profile/mainpage");
+      
+    }
+    if(accountCr){
+      alert("Aby aktywować konto kliknij w link aktywacyjny przesłany na podany adres email");
+      return <NavLink to="/login" />
+    };
+  };
     return (
       <div className={style.RegisterWindow}>
         <NaviBar />
         <div className={style.RegisterContainer}>
           <h1 className={style.RegisterHeader}>Zarejestruj się</h1>
-          <form className={style.RegisterForm}>
+          <form className={style.RegisterForm} onSubmit={e=>onSubmit(e)}>
             <label className={style.RegisterFormLabel} htmlFor="email">
               Email
             </label>
@@ -18,6 +50,8 @@ class RegisterPage extends React.Component {
               type="email"
               id="email"
               name="email"
+              value={email}
+              onChange={e => onChange(e)}
               required
             />
             <label className={style.RegisterFormLabel} htmlFor="name">
@@ -26,8 +60,10 @@ class RegisterPage extends React.Component {
             <input
               className={style.RegisterFormInput}
               type="text"
-              id="name"
-              name="name"
+              id="firstname"
+              name="firstname"
+              value={firstname}
+              onChange={e => onChange(e)}
               required
             />
             <label className={style.RegisterFormLabel} htmlFor="lastname">
@@ -38,6 +74,8 @@ class RegisterPage extends React.Component {
               type="text"
               id="lastname"
               name="lastname"
+              value={lastname}
+              onChange={e => onChange(e)}
               required
             />
             <label className={style.RegisterFormLabel} htmlFor="password">
@@ -48,16 +86,20 @@ class RegisterPage extends React.Component {
               type="password"
               id="password"
               name="password"
+              value={password}
+              onChange={e=>onChange(e)}
               required
             />
-            <label className={style.RegisterFormLabel} htmlFor="repassword">
+            <label className={style.RegisterFormLabel} htmlFor="re_password">
               Powtórz hasło
             </label>
             <input
               className={style.RegisterFormInput}
               type="password"
-              id="repassword"
-              name="repassword"
+              id="re_password"
+              name="re_password"
+              value={re_password}
+              onChange={e=>onChange(e)}
               required
             />
             <div className={style.Link_btn_Container}>
@@ -71,5 +113,7 @@ class RegisterPage extends React.Component {
       </div>
     );
   }
-}
-export default RegisterPage;
+  const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated
+  });
+  export default connect(mapStateToProps, { register })(RegisterPage);
