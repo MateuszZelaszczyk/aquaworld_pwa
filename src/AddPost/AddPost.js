@@ -2,9 +2,38 @@ import React, { useState } from "react";
 import Navi from "../MainPage/Navi";
 import style from "./AddPost.module.css";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 const NewPost = () => {
   const [fotoShow, setFotoShow] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [title, setTitle] = useState("");
+  const [describe, setDescribe] = useState("");
+  const [isPublic, setIsPublic] = useState(true);
+  const [images, setImages] = useState([]);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(images[0])
+    const data = new FormData();
+    data.append("title", title);
+    data.append("describe", describe);
+    data.append("isPublic", isPublic);
+    for(let i=0; i<images.length; i++){
+      data.append('uploaded_images', images[i])
+    }
+    axios
+      .post("http://localhost:8000/api/posts/", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setTitle("");
+        setDescribe("");
+        setImages([]);
+        setIsPublic(true);
+      });
+  };
 
   const handleFileChange = (index, event) => {
     const newFiles = [...selectedFiles];
@@ -14,18 +43,22 @@ const NewPost = () => {
     const fotos =[...fotoShow];
     fotos[index]=URL.createObjectURL(event.target.files[0]);
     setFotoShow(fotos);
+    setImages(newFiles)
+console.log(fotos);
+console.log(newFiles);
   };
 
   const handleAddField = () => {
     setSelectedFiles([...selectedFiles, null]);
     setFotoShow([...fotoShow, null]);
   };
+
   return (
     <div>
       <Navi show={'none'} />
       <div className={style.NewPostContainer}>
         <h1 className={style.NewPostHeader}>Nowy post</h1>
-        <form className={style.PostForm}>
+        <form className={style.PostForm} onSubmit={handleSubmit}>
           <label className={style.NewPostLabel} htmlFor="title">
             Tytuł
           </label>
@@ -35,6 +68,8 @@ const NewPost = () => {
             name="title"
             type="text"
             placeholder="Podaj tytuł..."
+            value={title}
+            onChange={(e)=>setTitle(e.target.value)}
           />
           <label className={style.NewPostLabel} htmlFor="describe">
             Opisz swój problem
@@ -44,6 +79,8 @@ const NewPost = () => {
             required
             name="describe"
             placeholder="Napisz o co chodzi"
+            value={describe}
+            onChange={(e)=>setDescribe(e.target.value)}
           />
           {selectedFiles.map((file, index) => (
             <div key={index} className={style.File}>
@@ -72,7 +109,8 @@ const NewPost = () => {
                 className={style.NewPostVisible}
                 name="isPublic"
                 type="radio"
-                value="public"
+                value={true}
+                onChange={(e)=>setIsPublic(e.target.value)}
               />
             </div>
             <div className={style.RadioContainer}>
@@ -83,7 +121,8 @@ const NewPost = () => {
                 className={style.NewPostVisible}
                 name="isPublic"
                 type="radio"
-                value="private"
+                value={false}
+                onChange={(e)=>setIsPublic(e.target.value)}
               />
             </div>
           </div>

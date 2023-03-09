@@ -32,6 +32,7 @@ const NewAqua = () => {
       startDate,
       image: image,
     };
+    console.log(data)
     axios
       .post("http://localhost:8000/api/aquariums/", data, {
         headers: { "Content-Type": "multipart/form-data" },

@@ -1,36 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navi from "../MainPage/Navi";
 import style from "./MyAqua.module.css";
 import Foto from "../Assets/IconFish.png";
 import { NavLink } from "react-router-dom";
 import FormMenu from "./FormMenu/FormMenu.js";
+import axios from "axios";
 
-const data = [
-  {
-    name: "ogólne",
-    pojemnosc: 375,
-    wymiary: [{ szerokosc: 150, wysokosc: 50, glebokosc: 50 }],
-    zalozono: "10-11-2022",
-    rodzaj: "słodkowodne",
-    zdjecie: Foto,
-  },
-  {
-    name: "gupikarium",
-    pojemnosc: 54,
-    wymiary: [{ szerokosc: 50, wysokosc: 35, glebokosc: 25 }],
-    zalozono: "10-11-2012",
-    rodzaj: "słodkowodne",
-    zdjecie: Foto,
-  },
-];
 const MyAqua = () => {
   const [visible, setVisible] = useState(false);
   const [id, setId] = useState();
-
+  const [data, setData] = useState([]);
+  const getData= async()=>{
+    const response =await axios.get("http://localhost:8000/api/aquariums/");
+    setData(response.data)
+  }
   function handleVisibleCl(index) {
     setVisible(!visible);
     setId(index);
   }
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div className={style.MainContainer}>
       <Navi show={"none"} />
@@ -44,28 +34,27 @@ const MyAqua = () => {
           <p className={style.Head6}>Rodzaj</p>
           <p className={style.Head7}></p>
         </div>
-        {data.map((fish, index) => (
+        {data.map((aquarium, index) => (
           <div key={index} className={style.ItemContainer}>
             <p className={style.Head}></p>
-            <img className={style.AquaFoto} alt="" src={fish.zdjecie} />
+            <img className={style.AquaFoto} alt="" src={aquarium.image} />
             <p className={style.Head}>Nazwa:</p>
-            <p className={style.Para1}>{fish.name}</p>
+            <p className={style.Para1}>{aquarium.name}</p>
             <p className={style.Head}>Pojmeność (l):</p>
-            <p className={style.Para2}>{fish.pojemnosc}</p>
+            <p className={style.Para2}>{aquarium.capacity}</p>
             <p className={style.Head}>Wymiary (cm):</p>
             <div className={style.SizeContainer}>
-              {fish.wymiary.map((size, ind) => (
-                <div className={style.Size} key={ind}>
-                  <p className={style.SizeParagraph}>Sz: {size.szerokosc}</p>
-                  <p className={style.SizeParagraph}>Wy: {size.wysokosc}</p>
-                  <p className={style.SizeParagraph}>Gł: {size.glebokosc}</p>
+                <div className={style.Size} >
+                  <p className={style.SizeParagraph}>Sz: {aquarium.length}</p>
+                  <p className={style.SizeParagraph}>Wy: {aquarium.height}</p>
+                  <p className={style.SizeParagraph}>Gł: {aquarium.depth}</p>
                 </div>
-              ))}
+
             </div>
             <p className={style.Head}>Data założenia:</p>
-            <p className={style.Para3}>{fish.zalozono}</p>
+            <p className={style.Para3}>{aquarium.startDate}</p>
             <p className={style.Head}>Rodzaj:</p>
-            <p className={style.Para4}>{fish.rodzaj}</p>
+            <p className={style.Para4}>{aquarium.type}</p>
             <div className={style.BtnContainer}>
               <button className={style.MoreInfoBtn}>
                 <NavLink
