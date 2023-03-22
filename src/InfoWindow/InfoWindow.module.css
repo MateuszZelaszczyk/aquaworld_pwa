@@ -1,0 +1,16 @@
+.WindowContainer {
+    background: white;
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    z-index: 1000; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+.Window{
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
