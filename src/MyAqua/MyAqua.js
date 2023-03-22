@@ -5,15 +5,32 @@ import Foto from "../Assets/IconFish.png";
 import { NavLink } from "react-router-dom";
 import FormMenu from "./FormMenu/FormMenu.js";
 import axios from "axios";
-
 const MyAqua = () => {
+  const token = localStorage.getItem("access");
+  
   const [visible, setVisible] = useState(false);
   const [id, setId] = useState();
   const [data, setData] = useState([]);
-  const getData= async()=>{
-    const response =await axios.get("http://localhost:8000/api/aquariums/");
-    setData(response.data)
-  }
+  const getData = async () => {
+    const response = await axios.get("http://localhost:8000/api/aquariums/", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    setData(response.data);
+    console.log(response.data);
+  };
+  const deleteAqua = async (id) => {
+    await axios.delete(
+      `http://localhost:8000/api/aquariums/${id}/`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    getData();
+  };
   function handleVisibleCl(index) {
     setVisible(!visible);
     setId(index);
@@ -44,12 +61,11 @@ const MyAqua = () => {
             <p className={style.Para2}>{aquarium.capacity}</p>
             <p className={style.Head}>Wymiary (cm):</p>
             <div className={style.SizeContainer}>
-                <div className={style.Size} >
-                  <p className={style.SizeParagraph}>Sz: {aquarium.length}</p>
-                  <p className={style.SizeParagraph}>Wy: {aquarium.height}</p>
-                  <p className={style.SizeParagraph}>Gł: {aquarium.depth}</p>
-                </div>
-
+              <div className={style.Size}>
+                <p className={style.SizeParagraph}>Sz: {aquarium.length}</p>
+                <p className={style.SizeParagraph}>Wy: {aquarium.height}</p>
+                <p className={style.SizeParagraph}>Gł: {aquarium.depth}</p>
+              </div>
             </div>
             <p className={style.Head}>Data założenia:</p>
             <p className={style.Para3}>{aquarium.startDate}</p>
@@ -59,21 +75,26 @@ const MyAqua = () => {
               <button className={style.MoreInfoBtn}>
                 <NavLink
                   className={style.Link}
-                  to={`/profile/myaqua/moreinformations/${index}`}
+                  to={`/profile/myaqua/moreinformations/${aquarium.id}`}
                 >
                   Szczegóły
                 </NavLink>
               </button>
               <button
                 className={style.MoreBtn}
-                onClick={() => handleVisibleCl(index)}
+                onClick={() => handleVisibleCl(aquarium.id)}
               >
                 + Informacje
               </button>
               <button className={style.EditBtn}>Edytuj</button>
-              <button className={style.DeleteBtn}>Usuń</button>
+              <button
+                onClick={() => deleteAqua(aquarium.id)}
+                className={style.DeleteBtn}
+              >
+                Usuń
+              </button>
             </div>
-            {id === index && visible && (
+            {id === aquarium.id && visible && (
               <FormMenu visible={handleVisibleCl} index={id} actual={visible} />
             )}
           </div>

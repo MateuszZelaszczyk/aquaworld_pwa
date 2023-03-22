@@ -83,11 +83,15 @@ const MainPage = () => {
   const Collaps = () => {
     setCollapse(!collapseSidebar);
   };
-
+  const token = localStorage.getItem('access');
   const [data, setData] = useState([]);
   const getData= async()=>{
-    const response =await axios.get("http://localhost:8000/api/posts/");
-    setData(response.data)
+    const response =await axios.get("http://localhost:8000/api/postsinfo",   {headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json'
+    }});
+    setData(response.data);
+    console.log(response)
   }
   useEffect(() => {
     getData();
@@ -104,11 +108,11 @@ const MainPage = () => {
                 <img
                   className={style.AuthAvatar}
                   alt="Avatar"
-                  src={post.author.avatar}
+                  src={post.user_id__image}
                 />
                 <p className={style.AuthName}>
-                  {post.author.name} {post.author.lastname},{" "}
-                  {post.author.location}
+                  {post.user_id__firstname} {post.user_id__lastname} {" "}
+                  {post.user_id__location}
                 </p>
               </div>
               <div className={style.PostValue}>
@@ -129,21 +133,7 @@ const MainPage = () => {
                 </button>
               </div>
               <div className={style.InteractContainer}>
-                {post.comments.map((comment, id) => (
-                  <div className={style.CommentSection} key={id}>
-                    <div className={style.CommmentAuthorContainer}>
-                      <img
-                        className={style.CommentAvatar}
-                        alt=""
-                        src={comment.author.avatar}
-                      />
-                      <p className={style.CommentAuthor}>
-                        {comment.author.name} {comment.author.lastname}
-                      </p>
-                    </div>
-                    <p className={style.CommentValue}>{comment.value}</p>
-                  </div>
-                ))}
+              
               </div>
             </div>
           ))}
