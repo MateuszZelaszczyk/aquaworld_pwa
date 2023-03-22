@@ -4,6 +4,7 @@ import style from "./AddPost.module.css";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 const NewPost = () => {
+  const token = localStorage.getItem('access')
   const [fotoShow, setFotoShow] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [title, setTitle] = useState("");
@@ -24,7 +25,7 @@ const NewPost = () => {
     }
     axios
       .post("http://localhost:8000/api/posts/", data, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "multipart/form-data", Authorization:`Bearer ${token}` },
       })
       .then((response) => {
         console.log(response.data);

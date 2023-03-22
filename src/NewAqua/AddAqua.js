@@ -6,10 +6,10 @@ import Avatar from "../Assets/Avatar.png";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 const NewAqua = () => {
-  //const avatarUrl = UserAvatar;
+  const token = localStorage.getItem('access')
+
   const [avatarShow, setAvatarShow] = useState(null);
   const [image, setImage] = useState(Avatar);
-  const email = "matesz.zywy@wp.pl";
   const [name, setName] = useState("");
   const [capacity, setCapacity] = useState(0);
   const [height, setHeight] = useState(0);
@@ -22,7 +22,6 @@ const NewAqua = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      email,
       name,
       capacity,
       height,
@@ -32,10 +31,9 @@ const NewAqua = () => {
       startDate,
       image: image,
     };
-    console.log(data)
     axios
       .post("http://localhost:8000/api/aquariums/", data, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "multipart/form-data",Authorization:`Bearer ${token}` },
       })
       .then((response) => {
         console.log(response.data);
