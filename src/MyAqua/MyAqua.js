@@ -1,16 +1,68 @@
 import React, { useState, useEffect } from "react";
 import Navi from "../MainPage/Navi";
 import style from "./MyAqua.module.css";
-import Foto from "../Assets/IconFish.png";
 import { NavLink } from "react-router-dom";
 import FormMenu from "./FormMenu/FormMenu.js";
 import axios from "axios";
 const MyAqua = () => {
   const token = localStorage.getItem("access");
-  
+  const [isEditing, setIsEditing] = useState(false);
   const [visible, setVisible] = useState(false);
   const [id, setId] = useState();
   const [data, setData] = useState([]);
+  const [name, setName] = useState();
+  const [capacity, setCapacity] = useState();
+  const [type, setType] = useState();
+  const [length, setLength] = useState();
+  const [height, setHeight] = useState();
+  const [depth, setDepth] = useState();
+  const [startDate, setStartDate] = useState();
+  const [image, setImage] = useState();
+  const [avatarURL, setAvatarURL] = useState(null);
+  const handleEditClick = (index, aquarium) => {
+    setIsEditing(true);
+    setId(index);
+    setName(aquarium.name);
+    setCapacity(aquarium.capacity);
+    setType(aquarium.type);
+    setLength(aquarium.length);
+    setHeight(aquarium.height);
+    setDepth(aquarium.depth);
+    setStartDate(aquarium.startDate);
+    setImage(aquarium.image);
+  };
+  const handleSaveClick = () => {
+    axios
+      .put(
+        `http://localhost:8000/api/aquariums/${id}/`,
+        {
+          name: name,
+          capacity: capacity,
+          type: type,
+          length: length,
+          height: height,
+          depth: depth,
+          startDate: startDate,
+          image: avatarURL,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        getData();
+        setIsEditing(false);
+      });
+  };
+  const update = (e) => {
+    setAvatarURL(e.target.files[0]);
+    var file = e.target.files[0];
+    const objectURL = URL.createObjectURL(file);
+    setImage(objectURL);
+  };
   const getData = async () => {
     const response = await axios.get("http://localhost:8000/api/aquariums/", {
       headers: {
@@ -18,17 +70,13 @@ const MyAqua = () => {
       },
     });
     setData(response.data);
-    console.log(response.data);
   };
   const deleteAqua = async (id) => {
-    await axios.delete(
-      `http://localhost:8000/api/aquariums/${id}/`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
+    await axios.delete(`http://localhost:8000/api/aquariums/${id}/`, {
+      headers: {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    });
     getData();
   };
   function handleVisibleCl(index) {
@@ -38,6 +86,7 @@ const MyAqua = () => {
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <div className={style.MainContainer}>
       <Navi show={"none"} />
@@ -53,24 +102,80 @@ const MyAqua = () => {
         </div>
         {data.map((aquarium, index) => (
           <div key={index} className={style.ItemContainer}>
-            <p className={style.Head}></p>
-            <img className={style.AquaFoto} alt="" src={aquarium.image} />
-            <p className={style.Head}>Nazwa:</p>
-            <p className={style.Para1}>{aquarium.name}</p>
-            <p className={style.Head}>Pojmeność (l):</p>
-            <p className={style.Para2}>{aquarium.capacity}</p>
-            <p className={style.Head}>Wymiary (cm):</p>
-            <div className={style.SizeContainer}>
-              <div className={style.Size}>
-                <p className={style.SizeParagraph}>Sz: {aquarium.length}</p>
-                <p className={style.SizeParagraph}>Wy: {aquarium.height}</p>
-                <p className={style.SizeParagraph}>Gł: {aquarium.depth}</p>
+            {isEditing && aquarium.id === id ? (
+              <div className={style.ItemContainer2}>
+                <div className={style.file_input}>
+                  <input
+                    className={style.AquaFotoInput}
+                    type="file"
+                    onChange={(e) => update(e)}
+                  />
+                  <label>Wybierz plik...</label>
+                </div>
+                <img className={style.AquaFoto} alt="" src={image} />
+                <input
+                  className={style.Input1}
+                  value={name}
+                  type="text"
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                  className={style.Input2}
+                  value={capacity}
+                  type="text"
+                  onChange={(e) => setCapacity(e.target.value)}
+                />
+                <div className={style.SizeContainer}>
+                  <div className={style.Size}>
+                    <input
+                      className={style.SizeInput}
+                      value={length}
+                      type="number"
+                      onChange={(e) => setLength(e.target.value)}
+                    />
+                    <input
+                      className={style.SizeInput}
+                      value={height}
+                      type="number"
+                      onChange={(e) => setHeight(e.target.value)}
+                    />
+                    <input
+                      className={style.SizeInput}
+                      value={depth}
+                      type="number"
+                      onChange={(e) => setDepth(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <input
+                  className={style.Input3}
+                  value={startDate}
+                  type="date"
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+                <input
+                  className={style.Input4}
+                  value={type}
+                  type="text"
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
               </div>
-            </div>
-            <p className={style.Head}>Data założenia:</p>
-            <p className={style.Para3}>{aquarium.startDate}</p>
-            <p className={style.Head}>Rodzaj:</p>
-            <p className={style.Para4}>{aquarium.type}</p>
+            ) : (
+              <div className={style.ItemContainer2}>
+                <img className={style.AquaFoto} alt="" src={aquarium.image} />
+                <p className={style.Para1}>{aquarium.name}</p>
+                <p className={style.Para2}>{aquarium.capacity}</p>
+                <div className={style.SizeContainer}>
+                  <div className={style.Size}>
+                    <p className={style.SizeParagraph}>Sz: {aquarium.length}</p>
+                    <p className={style.SizeParagraph}>Wy: {aquarium.height}</p>
+                    <p className={style.SizeParagraph}>Gł: {aquarium.depth}</p>
+                  </div>
+                </div>
+                <p className={style.Para3}>{aquarium.startDate}</p>
+                <p className={style.Para4}>{aquarium.type}</p>
+              </div>
+            )}
             <div className={style.BtnContainer}>
               <button className={style.MoreInfoBtn}>
                 <NavLink
@@ -86,7 +191,21 @@ const MyAqua = () => {
               >
                 + Informacje
               </button>
-              <button className={style.EditBtn}>Edytuj</button>
+              {isEditing && id === aquarium.id ? (
+                <button
+                  className={style.EditBtn}
+                  onClick={() => handleSaveClick()}
+                >
+                  Zapisz
+                </button>
+              ) : (
+                <button
+                  className={style.EditBtn}
+                  onClick={() => handleEditClick(aquarium.id, aquarium)}
+                >
+                  Edytuj
+                </button>
+              )}
               <button
                 onClick={() => deleteAqua(aquarium.id)}
                 className={style.DeleteBtn}

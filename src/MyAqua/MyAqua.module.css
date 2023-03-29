@@ -11,7 +11,7 @@
 .ItemContainer {
 
     display: grid;
-    grid-template-columns: 13% 12% 10% 15% 15% 12% 23%;
+    grid-template-columns: 13% 12% 10% 15% 15% 12% ;
     grid-column-start: 1;
     grid-column-end: 8;
     margin-top: 10px;
@@ -19,7 +19,12 @@
 
 
 }
-
+.ItemContainer2{
+    display: grid;
+    grid-template-columns: 17% 18% 12% 18% 18% 18% ;
+    grid-column-start: 1;
+    grid-column-end: 7;
+}
 .HeadContainer {
     grid-column-start: 1;
     grid-column-end: 8;
@@ -56,7 +61,7 @@
 
 }
 
-.Head1, .AquaFoto {
+.Head1, .AquaFoto, .AquaFotoInput {
     grid-column-start: 1;
     grid-column-end: 2;
     width: 60px;
@@ -64,14 +69,39 @@
     margin-left: 5px;
 
 }
-
-.Head2, .Para1 {
+.file_input{
+    position: relative;
+    width: 150px;
+    height: 24px;
+    border: 1px solid black;
+    overflow: hidden;
+    justify-items: center;
+    cursor: pointer;
+}
+.file_input input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+.file_input label {
+    display: block;
+    padding: 3px;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+  }
+.AquaFotoInput{
+    background-color: white;
+    height: 24px;
+    width:100%;
+}
+.Head2, .Para1, .Input1 {
     grid-column-start: 2;
     grid-column-end: 3;
 
 }
 
-.Head3, .Para2 {
+.Head3, .Para2, .Input2{
     grid-column-start: 3;
     grid-column-end: 4;
 
@@ -83,13 +113,13 @@
 
 }
 
-.Head5, .Para3 {
+.Head5, .Para3, .Input3 {
     grid-column-start: 5;
     grid-column-end: 6;
 
 }
 
-.Head6, .Para4 {
+.Head6, .Para4, .Input4 {
     grid-column-start: 6;
     grid-column-end: 7;
 
@@ -161,6 +191,10 @@
 .Head {
     display: none;
 }
+.Input1, .Input2, .Input3, .Input4{
+    height: 24px;
+    width:80%;
+}
 
 @media(max-width:800px) {
     .AquaContainer {
@@ -170,7 +204,7 @@
 
     }
 
-    .ItemContainer {
+    .ItemContainer, .ItemContainer2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
         padding-bottom: 10px;
@@ -201,16 +235,22 @@
     }
     .Size{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
     }
-    .SizeParagraph{
+    .SizeParagraph, .SizeInput{
         margin-right: 5px;
     }
-.Para1, .Para2, .Para3, .Para4{
-    grid-column-start: 2;
-    grid-column-end: 3;
+.Para1, .Para2, .Para3, .Para4, .Input1, .Input2, .Input3, .Input4{
+    grid-column-start: 1;
+    grid-column-end: 2;
     margin-bottom:5px;
 }
-
+.SizeContainer{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 6;
+    margin-bottom:5px;
+}
 
 }
