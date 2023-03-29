@@ -1,52 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Modal.module.css";
 import Close from "../../Assets/close.svg";
+import axios from "axios";
 //import axios from "axios";
 //const url = "http://3.68.195.28/api/users/";
 const EditUser = (props) => {
-  const [name, setName] = useState("Michał");
-  const [lastName, setLastName] = useState("Nowak");
-  const [phoneNumber, setPhone] = useState("345655444");
-  const [description, setDescription] = useState("Witam wszytskich");
-  //const [id, setId] = useState(props.id);
-
-  const update = (e) => {
-    const set = "set"+e.target.name;
-    console.log(set);
-    switch(set){
-        case "setName":
-            setName(e.target.value);
-            break;
-        case "setLastName":
-            setLastName(e.target.value);
-            break;
-        case "setPhone":
-            setPhone(e.target.value);
-            break;
-        case "setDescription":
-            setDescription(e.target.value);
-            break;
-        default:
-            console.error(e.target.name);
+  const [id,setId] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhone] = useState("");
+  const [location, setLocation] = useState("");
+  const [province, setProvince] = useState("");
+  const token = localStorage.getItem("access");
+  const getData = async () => {
+    const response = await axios.get("http://localhost:8000/api/userInfo/", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = response.data['user'][0];
+    setId(response.data["id"]);
+    setName(data.firstname);
+    setLastName(data.lastname);
+    if (data.phone) {
+      setPhone(data.phone);
+    }
+    if (data.location) {
+      setLocation(data.location);
+    }
+    if (data.province) {
+      setProvince(data.province);
     }
   };
-  /*const onSubmit = async () => {
-    const userData = {
-      firstName: name,
-      lastName: lastName,
-      phoneNumber: phoneNumber,
-      description: description,
-    };
-    const response = await axios
-      .patch(
-        url + id,
-        {
-          userData,
-        },
-        { headers: { Authorization: `Bearer ${props.token}` } }
-      )
-      .then(props.getData, props.CloseModal());
-  };*/
+  const update = (e) => {
+    e.preventDefault();
+    const response = axios.put(
+      `http://localhost:8000/api/updateuser/${id}/`,
+      {
+        firstname: name,
+        lastname: lastName,
+        phone: phoneNumber,
+        location: location,
+        province: province,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    ).then((response)=>{ props.getInfo(); props.getData()})
+  };
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className={style.MainContainer}>
@@ -56,7 +58,7 @@ const EditUser = (props) => {
           <img alt="" src={Close} />
         </button>
       </div>
-      <form onSubmit={() => this.onSubmit()}>
+      <form onSubmit={update}>
         <div className={style.LabelGroup}>
           <label className={style.EditTextLabel}>Imię </label>
           <input
@@ -64,7 +66,7 @@ const EditUser = (props) => {
             value={name}
             type="text"
             name="Name"
-            onChange={(e) => update(e)}
+            onChange={(e) => setName(e.target.value)}
           ></input>
         </div>
         <div className={style.LabelGroup}>
@@ -74,7 +76,7 @@ const EditUser = (props) => {
             value={lastName}
             type="text"
             name="LastName"
-            onChange={(e) => update(e)}
+            onChange={(e) => setLastName(e.target.value)}
           ></input>
         </div>
         <div className={style.LabelGroup}>
@@ -86,20 +88,29 @@ const EditUser = (props) => {
             value={phoneNumber}
             type="tel"
             name="Phone"
-            onChange={(e) => update(e)}
+            onChange={(e) => setPhone(e.target.value)}
           ></input>
         </div>
         <div className={style.LabelGroup}>
-          <label className={style.EditTextLabel}>Dodatkowe informacje </label>
+          <label className={style.EditTextLabel}>Miasto </label>
           <input
             className={style.TextInput}
-            value={description}
-            name="Description"
-            onChange={(e) => update(e)}
+            value={location}
+            name="Location"
+            onChange={(e) => setLocation(e.target.value)}
+          ></input>
+        </div>
+        <div className={style.LabelGroup}>
+          <label className={style.EditTextLabel}>Województwo </label>
+          <input
+            className={style.TextInput}
+            value={province}
+            name="Province"
+            onChange={(e) => setProvince(e.target.value)}
           ></input>
         </div>
         <div className={style.FormContainerButtons}>
-          <button className={style.Send} id={style.SaveChange}>
+          <button type="submit" className={style.Send} id={style.SaveChange}>
             Zapisz zmiany
           </button>
           <button
