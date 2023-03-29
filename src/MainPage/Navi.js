@@ -10,13 +10,29 @@ import menu from "../Assets/menu.svg";
 import search from "../Assets/search.svg";
 import users from "../Assets/users.svg";
 import { logout } from "../Actions/auth.js";
-import { connect } from "react-redux";;
+import { connect } from "react-redux";
+import axios from "axios";
+
 const Navi = ({isAuthenticated,logout,...props}) => {
   const navigate = useNavigate();
+  const [data, setData]= useState([]);
+  const [isLoad, setIsLoad] = useState(false)
+  const token = localStorage.getItem("access");
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const getInfo = async () => {
+    const response = await axios.get(
+      "http://localhost:8000/api/userInfo/",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    setData(response.data['user'][0]);
+    setIsLoad(true);
+  };
   useEffect(() => {
+    getInfo();
     if (isAuthenticated===false) {
       navigate("/");
     }
@@ -50,7 +66,7 @@ const Navi = ({isAuthenticated,logout,...props}) => {
   
 
 
-  return (
+  return isLoad?(
     <nav className={style.MainNaviContainer} >
       <div className={style.MainNaviMenu}>
         <NavLink to="/profile/mainpage" className={style.LogoContainer}  >
@@ -88,7 +104,7 @@ const Navi = ({isAuthenticated,logout,...props}) => {
               className={style.ProfilContainer}
               onClick={() => [setVisible(!visible), setIsMobile()]}
             >
-              Profil <img className={style.Foto} src={foto} alt="user" />
+              Profil <img className={style.Foto} src={"http://localhost:8000/media/"+data.image} alt="user" />
             </button>
           </li>
         </ul>
@@ -102,13 +118,13 @@ const Navi = ({isAuthenticated,logout,...props}) => {
         />
       )}
       <ModalWindow openModal={open} closeModal={CloseModal}>
-        <UserAvatar closeModal={CloseModal} />
+        <UserAvatar closeModal={CloseModal} getData={props.getData} getInfo={getInfo}  />
       </ModalWindow>
       <ModalWindow openModal={openEdit} closeModal={CloseModalEdit}>
-        <EditUser closeModal={CloseModalEdit} />
+        <EditUser closeModal={CloseModalEdit} getData={props.getData} getInfo={getInfo} />
       </ModalWindow>
     </nav>
-  );
+  ):(<div>Czekaj...</div>);
 };
 
 const mapSatateToProps = (state) => ({
