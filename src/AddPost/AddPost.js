@@ -3,6 +3,7 @@ import Navi from "../MainPage/Navi";
 import style from "./AddPost.module.css";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import InfoWindow from "../InfoWindow/InfoWindow";
 const NewPost = () => {
   const token = localStorage.getItem('access')
   const [fotoShow, setFotoShow] = useState([]);
@@ -11,28 +12,44 @@ const NewPost = () => {
   const [describe, setDescribe] = useState("");
   const [isPublic, setIsPublic] = useState(true);
   const [images, setImages] = useState([]);
-
+  const [show, setShow] = useState(false);
+  const [color, setColor] = useState("red");
+  const [info, setInfo] = useState("");
+  const [header, setHeader] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(images[0])
     const data = new FormData();
-    data.append("title", title);
-    data.append("describe", describe);
-    data.append("isPublic", isPublic);
     for(let i=0; i<images.length; i++){
       data.append('uploaded_images', images[i])
     }
     axios
-      .post("http://localhost:8000/api/posts/", data, {
+      .post("http://localhost:8000/api/posts/", {title, describe, isPublic, data}, {
         headers: { "Content-Type": "multipart/form-data", Authorization:`Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data);
+        setHeader("Udało się");
+        setInfo("Dane zostały zapisane");
+        setColor("green");
         setTitle("");
         setDescribe("");
         setImages([]);
         setIsPublic(true);
+        setShow(true);
+      })
+      .catch((err) => {
+        if (err.response) {
+          setHeader("Błąd!");
+          setInfo(err.response.data + err.response.status);
+          setColor("red");
+          setShow(true);
+        } else {
+          setHeader("Błąd!");
+          setInfo("Error" + err.message);
+          setColor("red");
+          setShow(true);
+        }
       });
   };
 
@@ -45,8 +62,6 @@ const NewPost = () => {
     fotos[index]=URL.createObjectURL(event.target.files[0]);
     setFotoShow(fotos);
     setImages(newFiles)
-console.log(fotos);
-console.log(newFiles);
   };
 
   const handleAddField = () => {
@@ -133,13 +148,16 @@ console.log(newFiles);
             </button>
             <button className={style.Back}>
               <NavLink to="/profile/mainpage" className={style.BackLink}>
-                Anuluj
+                Powrót
               </NavLink>
             </button>
           </div>
         </form>
       </div>
       <div style={{ height: "30px", margin: "30px" }}></div>
+      {show && (
+        <InfoWindow message={info} show={show} header={header} color={color} />
+      )}
     </div>
   );
 };
