@@ -5,9 +5,6 @@ const InfoWindow=(props)=> {
 
   const message = props.message;
   const show = props.show;
-  console.log(show);
-
-
   return (
     <div>
       {show && (
