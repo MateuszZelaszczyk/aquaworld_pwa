@@ -1,135 +1,129 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./MoreInformation.module.css";
-import Foto from "../Assets/Avatar.png";
 import Navi from "../MainPage/Navi";
 import { NavLink } from "react-router-dom";
-const data = [
-  {
-    name: "ogólne",
-    pojemnosc: 375,
-    wymiary: { szerokosc: 150, wysokosc: 50, glebokosc: 50 },
-    zalozono: "10-11-2022",
-    rodzaj: "słodkowodne",
-    zdjecie: Foto,
-    ryby: [
-      { nazwa: "Skalar", ilosc: 8 },
-      { nazwa: "Gurami mozikowe", ilosc: 4 },
-      { nazwa: "Neon czerwony", ilosc: 5 },
-      { nazwa: "Zwinik czerwonousty", ilosc: 30 },
-      { nazwa: "Barwniak czerwonobrzuchy", ilosc: 4 },
-      { nazwa: "Zbrojnik niebieski", ilosc: 5 },
-      { nazwa: "Bocja wspaniała", ilosc: 2 },
-      { nazwa: "Bocja siatkowa", ilosc: 4 },
-      { nazwa: "Węgorek ciernisty", ilosc: 2 },
-      { nazwa: "Molinezja księżycowa", ilosc: 2 },
-      { nazwa: "Gupik Endlera", ilosc: 5 },
-    ],
-    rosliny: [
-      { nazwa: "Orzech wodny", ilosc: 3 },
-      { nazwa: "lotos tygrysi", ilosc: 2 },
-      { nazwa: "kryptokoryna wendty green", ilosc: 8 },
-    ],
-    podloze: "Czarny żwirek bazaltowy 1-3mm + piasek ceramiczny 0.3-1mm",
-    substrat: "brak",
-    wyposazenie: {
-      oswietlenie: "Pokrywa z zamontowanymi 2 belkami powerLed po 33w każda",
-      filtracja: "Ikola 450 + Aquael turbo 1000",
-      ogrzewanie: "HapPet 200w",
-      CO2: "brak",
-      sterowanie: "Arduino sterujące zapalaniem i gaszeniem oświetlenia",
-      inne: "brak",
-    },
-
-    nawozenie: [
-      { nazwa: "Potas", dawka: 145 },
-      { nazwa: "Carbo", dawka: 60 },
-      { nazwa: "Fosfor", dawka: 34 },
-      { nazwa: "Azot", dawka: 24 },
-    ],
-  },
-];
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import Edit from "../Assets/edit.svg";
+import Check from "../Assets/check.svg";
+import FishRow from "./FishEdit";
+import PlantRow from "./PlantEdit";
+import FertRow from "./Fert";
 const MoreInformation = () => {
-  return (
-    <div className={style.MainContainer}>
-      <Navi show={'none'}  />
-      <div className={style.InfoContainer}>
-        {data.map((item, index) => (
-          <div key={index} className={style.ItemContainer}>
-            <div className={style.BaseInformation}>
-              <img className={style.Foto} alt="" src={item.zdjecie} />
-              <p className={style.Name}>
-                <span>Akwarium</span> {item.name}, {item.rodzaj}{" "}
-                <span>Pojemność </span>
-                {item.pojemnosc} litrów {"("}
-                {item.wymiary.szerokosc} x {item.wymiary.wysokosc} x{" "}
-                {item.wymiary.glebokosc}
-                {")"}
-              </p>
-              <p className={style.Date}>
-                {" "}
-                <span>Założono:</span> {item.zalozono}
-              </p>
-              <NavLink className={style.Link} to ="/profile/myaqua">Wróć</NavLink>
-            </div>
-            <div className={style.EquipmentContainer}>
-              <h4 className={style.EquipmentHeader}>Wyposażenie:</h4>
-              <p className={style.Light}>
-                <span>Oświetlenie:</span> {item.wyposazenie.oswietlenie}
-              </p>
-              <p className={style.Filtering}>
-                <span>Filtracja:</span> {item.wyposazenie.filtracja}
-              </p>
-              <p className={style.Warm}>
-                <span> Ogrzewanie: </span>
-                {item.wyposazenie.ogrzewanie}
-              </p>
-              <p className={style.Co2}>
-                <span>CO2:</span> {item.wyposazenie.CO2}
-              </p>
-              <p className={style.Control}>
-                <span>Sterowanie:</span> {item.wyposazenie.sterowanie}
-              </p>
-              <p className={style.Other}>
-                <span>Inne:</span> {item.wyposazenie.inne}
-              </p>
+  const [isLoad, setIsLoad] = useState(false);
+  const [aquarium, setAquarium] = useState([" "]);
+  const [fish, setFish] = useState([" "]);
+  const [plants, setPlants] = useState([" "]);
+  const [equipments, setEquipments] = useState([" "]);
+  const [ground, setGround] = useState([" "]);
+  const [fertilize, setfertilize] = useState([" "]);
+  const token = localStorage.getItem("access");
+  const id = useParams().id;
+  const getInfo = async () => {
+    const response = await axios.get(
+      "http://localhost:8000/api/aquaInfo/" + id + "/",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = response.data;
+    setAquarium(data["aquarium"]);
+    setFish(data["fish"]);
+    setPlants(data["plants"]);
+    if(data["equipments"][0]){
+    setEquipments(data["equipments"]);
+    }
+    setfertilize(data["fertilizers"]);
+    if (data["base"][0]) {
+      setGround(data["base"]);
+    }
+    setIsLoad(true);
+  };
+  useEffect(() => {
+    getInfo();
+  }, []);
 
-             
-              <p className={style.SubBase}><span>Substrat:</span> {item.substrat}</p>
-              <p className={style.Base}><span>Podłoże główne: </span>{item.podloze}</p>
+  return isLoad ? (
+    <div className={style.MainContainer}>
+      <Navi show={"none"} />
+      <div className={style.InfoContainer}>
+        <div className={style.ItemContainer}>
+          <div className={style.BaseInformation}>
+            <img
+              className={style.Foto}
+              alt=""
+              src={"http://localhost:8000/media/" + aquarium[0].image}
+            />
+            <p className={style.Name}>
+              <span>Akwarium</span> {aquarium[0].name}, {aquarium[0].type}{" "}
+              <span>Pojemność </span>
+              {aquarium[0].capacity} litrów {"("}
+              {aquarium[0].length} x {aquarium[0].height} x {aquarium[0].depth}
+              {")"}
+            </p>
+            <p className={style.Date}>
+              <span>Założono:</span> {aquarium[0].startDate}
+            </p>
+            <NavLink className={style.Link} to="/profile/myaqua">
+              Wróć
+            </NavLink>
+          </div>
+          <div className={style.EquipmentContainer}>
+            <h3 className={style.EquipmentHeader}>Wyposażenie</h3>
+            <p className={style.Light}>
+              <span>Oświetlenie:</span> {equipments[0].lighting}
+            </p>
+            <p className={style.Filtering}>
+              <span>Filtracja:</span> {equipments[0].filtering}
+            </p>
+            <p className={style.Warm}>
+              <span> Ogrzewanie: </span>
+              {equipments[0].heating}
+            </p>
+            <p className={style.Co2}>
+              <span>CO2:</span> {equipments[0].CO2}
+            </p>
+            <p className={style.Control}>
+              <span>Sterowanie:</span> {equipments[0].control}
+            </p>
+            <p className={style.Other}>
+              <span>Inne:</span> {equipments[0].other}
+            </p>
+
+            <p className={style.SubBase}>
+              <span>Substrat:</span> {ground[0].substrate}
+            </p>
+            <p className={style.Base}>
+              <span>Podłoże główne: </span>
+              {ground[0].base}
+            </p>
+          </div>
+          <div className={style.Container}>
+            <div className={style.FishContainer}>
+              <h4 className={style.FishHeader}>Ryby:</h4>
+              {fish.map((fish) => (
+                <FishRow key={fish.id} fish={fish} getInfo={getInfo}/>
+              ))}
             </div>
-            <div className={style.Container}>
-              <div className={style.FishContainer}>
-                <h4 className={style.FishHeader}>Ryby:</h4>
-                {item.ryby.map((ryba, id) => (
-                  <div key={id} className={style.Fish}>
-                    <p>{ryba.nazwa}: </p>
-                    <p>{ryba.ilosc}szt</p>
-                  </div>
-                ))}
-              </div>
-              <div className={style.PlantsContainer}>
-                <h4 className={style.PlantsHeader}>Rośliny:</h4>
-                {item.rosliny.map((roslina, id) => (
-                  <div key={id} className={style.Plant}>
-                    <p>{roslina.nazwa}:</p>
-                    <p>{roslina.ilosc}szt</p>
-                  </div>
-                ))}
-              </div>
-              <div className={style.FertilizerContainer}>
-                <h4 className={style.FertilizerHeader}>Nawożenie:</h4>
-                {item.nawozenie.map((nazwoz, id) => (
-                  <div key={id} className={style.Fertilizer}>
-                    <p>{nazwoz.nazwa}:</p>
-                    <p> {nazwoz.dawka}ml/tyg</p>
-                  </div>
-                ))}
-              </div>
+            <div className={style.PlantsContainer}>
+              <h4 className={style.PlantsHeader}>Rośliny:</h4>
+              {plants.map((plant, id) => (
+                 <PlantRow key={plant.id} plant={plant} getInfo={getInfo}/>
+              ))}
+            </div>
+            <div className={style.FertilizerContainer}>
+              <h4 className={style.FertilizerHeader}>Nawożenie:</h4>
+              {fertilize.map((fert, id) => (
+                <FertRow key={fert.id} fert={fert} getInfo={getInfo}/>
+              ))}
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
+  ) : (
+    <div>Czekaj...</div>
   );
 };
 

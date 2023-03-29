@@ -47,11 +47,19 @@ p{
 .Fish, .Plant, .Fertilizer{
     min-height: 25px;
     display:grid;
-    grid-template-columns:240px 100px;
+    grid-template-columns:200px 90px 10px;
 }
 
 .Fish >p, .Plant> p, .Fertilizer>p{
  margin-left: 10px;
+}
+.EditBtn{
+    width:24px;
+    height:24px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+
 }
 .Container{
     margin-left: 10px;
