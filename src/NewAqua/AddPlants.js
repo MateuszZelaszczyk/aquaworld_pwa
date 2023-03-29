@@ -52,7 +52,7 @@ const AddPlants = () => {
         setInfo("Dane zostały zapisane")
         setColor("green");
         setShow(true);
-        setPLants([]);
+        setPLants([ { name: "", quantity: 0, aquarium: aquarium }]);
       })
       .catch((err) => {
         if (err.response) {

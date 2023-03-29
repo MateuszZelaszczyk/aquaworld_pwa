@@ -56,7 +56,7 @@ const AddFish = () => {
         setInfo("Dane zostały zapisane");
         setColor("green");
         setShow(true);
-        setFish([]);
+        setFish([{ name: "", quantity: 0, aquarium: aquarium }]);
       })
       .catch((err) => {
         if (err.response) {
@@ -76,14 +76,12 @@ const AddFish = () => {
             setColor("red");
             setShow(true);
           }
-        }
-        else if(err.request){
+        } else if (err.request) {
           setHeader("Błąd!");
           setInfo(err.request);
           setColor("red");
           setShow(true);
-        }
-        else{
+        } else {
           setHeader("Błąd!");
           setInfo("Error" + err.message);
           setColor("red");

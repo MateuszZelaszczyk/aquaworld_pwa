@@ -7,7 +7,6 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 const NewAqua = () => {
   const token = localStorage.getItem('access')
-
   const [avatarShow, setAvatarShow] = useState(null);
   const [image, setImage] = useState(Avatar);
   const [name, setName] = useState("");
@@ -30,13 +29,14 @@ const NewAqua = () => {
       type,
       startDate,
       image: image,
+      
     };
+    console.log(data);
     axios
       .post("http://localhost:8000/api/aquariums/", data, {
         headers: { "Content-Type": "multipart/form-data",Authorization:`Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data);
         setName("");
         setCapacity(0);
         setHeight(0);
