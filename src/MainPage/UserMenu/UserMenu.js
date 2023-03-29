@@ -32,7 +32,7 @@ const UserMenu = ({logout, isAuthenticated, ...props}) => {
     <div className={style.MenuContainer} ref={refOne}>
       <button onClick={()=>props.openEdit()}  className={style.MenuBtn}>Edytuj profil</button>
       <button onClick={()=>props.openModal()} className={style.MenuBtn}>Edytuj/dodaj zdjęcie</button>
-      <NavLink to="/#!" className={style.MenuBtn}><button onClick={logout}>Wyloguj</button></NavLink>
+      <NavLink to="/#!" className={style.MenuBtn}><button onClick={logout} className={style.MenuBtn}>Wyloguj</button></NavLink>
     </div>
   );
 };
