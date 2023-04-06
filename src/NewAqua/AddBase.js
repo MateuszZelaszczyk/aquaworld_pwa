@@ -22,7 +22,7 @@ const AddBase = () => {
 
   const checkGround = async () => {
     const response = await axios.get(
-      `http://localhost:8000/api/groundInfo/${id}/`
+      `${process.env.REACT_APP_API_URL}/api/groundInfo/${id}/`
     );
     setIsGround(response.data["isGround"]);
     if (response.data["isGround"] === true) {
@@ -37,7 +37,7 @@ const AddBase = () => {
     if (isGround === true) {
       axios
         .put(
-          `http://localhost:8000/api/ground/${baseId}/`,
+          `${process.env.REACT_APP_API_URL}/api/ground/${baseId}/`,
           {
             aquarium: aquarium,
             substrate: substrate,
@@ -71,7 +71,7 @@ const AddBase = () => {
     } else {
       axios
         .post(
-          "http://localhost:8000/api/ground/",
+          `${process.env.REACT_APP_API_URL}/api/ground/`,
           {
             aquarium: aquarium,
             substrate: substrate,

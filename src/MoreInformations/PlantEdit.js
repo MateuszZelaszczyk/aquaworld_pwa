@@ -18,7 +18,7 @@ const PlantRow =(props)=> {
   const handleSaveClick = () => {
     axios
       .put(
-        `http://localhost:8000/api/plants/${plant.id}/`,
+        `${process.env.REACT_APP_API_URL}/api/plants/${plant.id}/`,
         {
           aquarium: id,
           name: name,

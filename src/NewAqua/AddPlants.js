@@ -41,7 +41,7 @@ const AddPlants = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/plants/",
+        `${process.env.REACT_APP_API_URL}/api/plants/`,
         { plants },
         {
           headers: { Authorization: `Bearer ${token}` },

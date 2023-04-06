@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navi from "../MainPage/Navi";
 import style from "./AddPost.module.css";
 import { NavLink } from "react-router-dom";
@@ -21,11 +21,14 @@ const NewPost = () => {
     e.preventDefault();
     console.log(images[0])
     const data = new FormData();
+    data.append('title', title);
+    data.append('describe', describe);
+    data.append('isPublic', isPublic)
     for(let i=0; i<images.length; i++){
       data.append('uploaded_images', images[i])
     }
     axios
-      .post("http://localhost:8000/api/posts/", {title, describe, isPublic, data}, {
+      .post("http://localhost:8000/api/posts/", data, {
         headers: { "Content-Type": "multipart/form-data", Authorization:`Bearer ${token}` },
       })
       .then((response) => {
@@ -68,7 +71,14 @@ const NewPost = () => {
     setSelectedFiles([...selectedFiles, null]);
     setFotoShow([...fotoShow, null]);
   };
-
+  useEffect(() => {
+    if (show) {
+      const timer = setTimeout(() => {
+        setShow(false);
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [show]);
   return (
     <div>
       <Navi show={'none'} />
@@ -106,6 +116,8 @@ const NewPost = () => {
                 onChange={(e) => handleFileChange(index, e)}
                 name="foto"
                 type="file"
+                accept="image/*"
+                capture="environment"
               ></input>
               <img className={style.Foto} src={fotoShow[index]} alt=""></img>
             </div>

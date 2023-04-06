@@ -18,7 +18,7 @@ const FishRow =(props)=> {
   const handleSaveClick = () => {
     axios
       .put(
-        `http://localhost:8000/api/fish/${fish.id}/`,
+        `${process.env.REACT_APP_API_URL}/api/fish/${fish.id}/`,
         {
           aquarium: id,
           name: name,

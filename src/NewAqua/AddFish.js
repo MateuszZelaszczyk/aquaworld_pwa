@@ -45,7 +45,7 @@ const AddFish = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/fish/",
+        `${process.env.REACT_APP_API_URL}/api/fish/`,
         { fish },
         {
           headers: { Authorization: `Bearer ${token}` },

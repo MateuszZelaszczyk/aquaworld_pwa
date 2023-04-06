@@ -34,7 +34,7 @@ const MyAqua = () => {
   const handleSaveClick = () => {
     axios
       .put(
-        `http://localhost:8000/api/aquariums/${id}/`,
+        `${process.env.REACT_APP_API_URL}/api/aquariums/${id}/`,
         {
           name: name,
           capacity: capacity,
@@ -64,7 +64,7 @@ const MyAqua = () => {
     setImage(objectURL);
   };
   const getData = async () => {
-    const response = await axios.get("http://localhost:8000/api/aquariums/", {
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/aquariums/`, {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -72,9 +72,10 @@ const MyAqua = () => {
     setData(response.data);
   };
   const deleteAqua = async (id) => {
-    await axios.delete(`http://localhost:8000/api/aquariums/${id}/`, {
+    await axios.delete(`${process.env.REACT_APP_API_URL}/api/aquariums/${id}/`, {
       headers: {
-        headers: { Authorization: `Bearer ${token}` },
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
       },
     });
     getData();

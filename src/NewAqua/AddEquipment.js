@@ -24,7 +24,7 @@ const AddEquipment = () => {
 
   const checkEquipments = async () => {
     const response = await axios.get(
-      `http://localhost:8000/api/equipmentInfo/${id}/`
+      `${process.env.REACT_APP_API_URL}/api/equipmentInfo/${id}/`
     );
     setIsEquipment(response.data["isEquipments"]);
     if (response.data["isEquipments"] === true) {
@@ -42,7 +42,7 @@ const AddEquipment = () => {
     if(isEquipment===true){
     axios
       .put(
-        `http://localhost:8000/api/equipments/${EquipmentId}/`,
+        `${process.env.REACT_APP_API_URL}/api/equipments/${EquipmentId}/`,
         {
           aquarium: aquarium,
           lighting: light,
@@ -79,7 +79,7 @@ const AddEquipment = () => {
     else{
       axios
       .post(
-        `http://localhost:8000/api/equipments/`,
+        `${process.env.REACT_APP_API_URL}/api/equipments/`,
         {
           aquarium: aquarium,
           lighting: light,
@@ -148,6 +148,7 @@ const AddEquipment = () => {
             type="text"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
+            required
           />
           <label className={style.NewAquaFormLabel} htmlFor="TempControl">
             Ogrzewanie
@@ -158,6 +159,7 @@ const AddEquipment = () => {
             type="text"
             value={heat}
             onChange={(e) => setHeat(e.target.value)}
+            required
           />
           <label className={style.NewAquaFormLabel} htmlFor="CO2">
             CO2

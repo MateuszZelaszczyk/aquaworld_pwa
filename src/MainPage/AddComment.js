@@ -10,7 +10,7 @@ const Post = (props) => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/comments/",
+        `${process.env.REACT_APP_API_URL}/api/comments/`,
         {text:text, post:postId,},
         {
           headers: { Authorization: `Bearer ${token}` },

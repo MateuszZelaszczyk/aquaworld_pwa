@@ -33,7 +33,7 @@ const NewAqua = () => {
     };
     console.log(data);
     axios
-      .post("http://localhost:8000/api/aquariums/", data, {
+      .post(`${process.env.REACT_APP_API_URL}/api/aquariums/`, data, {
         headers: { "Content-Type": "multipart/form-data",Authorization:`Bearer ${token}` },
       })
       .then((response) => {
@@ -165,6 +165,8 @@ const NewAqua = () => {
               alt=""
               name="foto"
               id="foto"
+              accept="image/*"
+              capture="environment"
               onChange={(e) => update(e)}
             ></input>
             <img className={style.Avatar} src={avatarShow} alt=""></img>

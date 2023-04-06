@@ -13,7 +13,7 @@ const EditUser = (props) => {
   const [province, setProvince] = useState("");
   const token = localStorage.getItem("access");
   const getData = async () => {
-    const response = await axios.get("http://localhost:8000/api/userInfo/", {
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/userInfo/`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = response.data['user'][0];
@@ -33,7 +33,7 @@ const EditUser = (props) => {
   const update = (e) => {
     e.preventDefault();
     const response = axios.put(
-      `http://localhost:8000/api/updateuser/${id}/`,
+      `${process.env.REACT_APP_API_URL}/api/updateuser/${id}/`,
       {
         firstname: name,
         lastname: lastName,

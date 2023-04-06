@@ -18,7 +18,7 @@ const FertRow =(props)=> {
   const handleSaveClick = () => {
     axios
       .put(
-        `http://localhost:8000/api/fertilization/${fert.id}/`,
+        `${process.env.REACT_APP_API_URL}/api/fertilization/${fert.id}/`,
         {
           aquarium: id,
           name: name,

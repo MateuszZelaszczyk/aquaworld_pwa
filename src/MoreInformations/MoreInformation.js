@@ -22,7 +22,7 @@ const MoreInformation = () => {
   const id = useParams().id;
   const getInfo = async () => {
     const response = await axios.get(
-      "http://localhost:8000/api/aquaInfo/" + id + "/",
+      `${process.env.REACT_APP_API_URL}/api/aquaInfo/` + id + "/",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -53,7 +53,7 @@ const MoreInformation = () => {
             <img
               className={style.Foto}
               alt=""
-              src={"http://localhost:8000/media/" + aquarium[0].image}
+              src={`${process.env.REACT_APP_API_URL}/media/` + aquarium[0].image}
             />
             <p className={style.Name}>
               <span>Akwarium</span> {aquarium[0].name}, {aquarium[0].type}{" "}

@@ -45,7 +45,7 @@ const AddFertilizer = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/fertilization/",
+        `${process.env.REACT_APP_API_URL}/api/fertilization/`,
         { fertilizer },
         {
           headers: { Authorization: `Bearer ${token}` },
