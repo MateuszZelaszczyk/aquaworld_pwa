@@ -18,7 +18,7 @@ const LogInPage =({ login, isAuthenticated })=>{
     const permission = await Notification.requestPermission();
     if (permission === "granted") {
       const token = await getToken(messaging, {
-        vapidKey:process.env.VAPID_KEY,
+        vapidKey:process.env.REACT_APP_VAPID_KEY,
       });
       setDToken(token);
 
