@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./HomePage/HomePage.js";
 import LoginPage from "./LogInPage/LogIn.js";
@@ -20,14 +20,48 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Layout from "./LogInPage/LayoutControl";
 import Activate from "./Account/Activate";
+import axios from "axios";
 
+const TOKEN_REFRESH_INTERVAL = 60 * 58 * 1000;
 const App = (isAuthenticated) => {
+  const [token, setToken] = useState(localStorage.getItem("refresh"));
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refreshToken();
+    }, TOKEN_REFRESH_INTERVAL);
+    try {
+      axios.interceptors.response.use(
+        (resp) => resp,
+        async (error) => {
+          if (error.response.status === 401) {
+            refreshToken();
+          }
+        }
+      );
+    } catch {
+      refreshToken();
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  function refreshToken() {
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/auth/jwt/refresh`, { refresh: token })
+      .then((response) => {
+        localStorage.setItem("access", response.data.access);
+        setToken(response.data.access);
+      });
+  }
+
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Layout>
           <Routes>
-          <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/" element={<HomePage />} />
             <Route exact path="/login" element={<LoginPage />} />
             <Route exact path="/register" element={<RegisterPage />} />
             <Route exact path="/repassword" element={<RePassword />} />
@@ -78,7 +112,7 @@ const App = (isAuthenticated) => {
               path="/profile/myaqua/moreinformations/:id"
               element={<MoreInformation />}
             />
-            <Route  path="activate/:uid/:token" element={<Activate/>}/>
+            <Route path="activate/:uid/:token" element={<Activate />} />
             <Route exact path="/#!" element={<HomePage />} />
           </Routes>
         </Layout>
