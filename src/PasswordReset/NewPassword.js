@@ -6,18 +6,12 @@ import { connect } from "react-redux";
 import { reset_password_confirm } from "../Actions/auth";
 const NewPassword = ({match, reset_password_confirm }) => {
   const [requestSent, setRequestSent] = useState(false)
-  const [formData, setFormData] = useState({
-    new_password: "",
-    re_new_password:"",
-  });
-  const { new_password, re_new_password} = formData;
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [new_password, setNew] = useState("");
+  const [re_new_password, setReNew] = useState("");
   const onSubmit = e => {
     e.preventDefault();
     const uid =match.params.uid;
     const token = match.params.token;
-
     reset_password_confirm(uid,token, new_password, re_new_password);
     setRequestSent(true);
    
@@ -40,11 +34,10 @@ const NewPassword = ({match, reset_password_confirm }) => {
               id="password"
               name="password"
               placeholder="Podaj nowe hasło..."
-              value={new_password}
-              onChange={e => onChange(e)}
+              
               required
             />
-            <label className={style.RePasswordFormLabel} htmlFor="password">
+            <label className={style.RePasswordFormLabel} htmlFor="repassword">
               Powtórz hasło
             </label>
             <input
@@ -54,7 +47,7 @@ const NewPassword = ({match, reset_password_confirm }) => {
               name="repassword"
               placeholder="Powtórz nowe hasło..."
               value={re_new_password}
-              onChange={e => onChange(e)}
+              onChange={(e) => setReNew(e.target.value)}
               required
             />
             <div className={style.BtnContainer}>
