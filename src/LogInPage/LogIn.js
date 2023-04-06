@@ -6,25 +6,54 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../Actions/auth";
 import { useCookies } from 'react-cookie';
+import { messaging } from "../firebase.js";
+import { getToken } from "firebase/messaging";
+import axios from "axios";
 const LogInPage =({ login, isAuthenticated })=>{
+  
   const navigate =useNavigate();
+  const [Dtoken, setDToken] = useState("");
+  const utoken = localStorage.getItem("access");
+  async function requestPermission() {
+    const permission = await Notification.requestPermission();
+    if (permission === "granted") {
+      const token = await getToken(messaging, {
+        vapidKey:process.env.VAPID_KEY,
+      });
+      setDToken(token);
+
+    } else if (permission === "denied") {
+      console.log("You denied for notification");
+    }
+    else{
+      console.log(permission)
+    }
+  }
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const { email, password } = formData;
-  const [cookies, setCookie] = useCookies(['login']);
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = e => {
     e.preventDefault();
     login(email, password);
-    setCookie('login', email, { path: '/' })
-   
+    requestPermission(); 
   };
+  const SendToken=()=>{
+    axios.post(`${process.env.REACT_APP_API_URL}/api/notifytokens/`,{token:Dtoken}, {
+      headers: {
+        Authorization: `Bearer ${utoken}`,
+      },
+    })
+  }
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/profile/mainpage");
+    }
+    if(utoken && Dtoken!==""){
+      SendToken();
     }
   }, [isAuthenticated, navigate]);
     return (
