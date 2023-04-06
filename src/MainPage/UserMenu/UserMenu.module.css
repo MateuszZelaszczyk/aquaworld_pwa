@@ -8,6 +8,46 @@
     z-index:2;
     background-color: #ffffff;
 }
+.ReqContainer{
+    position:absolute;
+    right: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    width: 200px;
+    box-shadow: 0px 5px 5px rgba(1, 1, 0, 0.24);
+    z-index:2;
+    background-color: #ebeaea;
+    text-align:center;
+}
+.ReqRow{
+    height: 24px;
+    width:200px;
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 29px;
+    text-align: center;
+    color: #000000;
+}
+.AcceptBtn, .DeleteBtn{
+    border-bottom:1px solid rgb(213, 213, 217);
+    text-decoration: none;
+    color: #000000;
+    background:none;
+    border:none;
+    height:20px;
+    cursor: pointer;
+}
+.AcceptBtn{
+    background-color:rgba(0, 128, 0, 0.313);
+}
+.DeleteBtn{
+    background-color: rgba(255, 0, 0, 0.253);
+}
 .MenuBtn{
     background:none;
     border:none;
