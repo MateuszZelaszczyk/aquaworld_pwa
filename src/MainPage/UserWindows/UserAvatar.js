@@ -16,19 +16,19 @@ const UserAvatar = (props) => {
   };
   const token = localStorage.getItem("access");
   const getData = async () => {
-    const response = await axios.get("http://localhost:8000/api/userInfo/", {
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/userInfo/`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = response.data;
     setAvatarURL(data["user"][0]["image"])
     setId(response.data["id"]);
-   setAvatarShow("http://localhost:8000/media/"+data["user"][0]["image"])
+   setAvatarShow(`${process.env.REACT_APP_API_URL}/media/`+data["user"][0]["image"])
     setLoad(true)
   };
   const updateAvatar = (e) => {
     e.preventDefault();
     const response = axios.put(
-      `http://localhost:8000/api/updateAvatar/${id}/`,
+      `${process.env.REACT_APP_API_URL}/api/updateAvatar/${id}/`,
       {
         image: avatarURL,
       },
@@ -60,6 +60,8 @@ const UserAvatar = (props) => {
             alt=""
             name="foto"
             id="foto"
+            accept="image/*"
+            capture="environment"
             onChange={(e) => update(e)}
           ></input>
           <img

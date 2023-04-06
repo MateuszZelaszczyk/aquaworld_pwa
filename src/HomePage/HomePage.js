@@ -6,6 +6,7 @@ import Icon from "../Assets/TalkFish.png";
 import { logout } from "../Actions/auth";
 import { connect } from "react-redux";
 const HomePage = ({logout, isAuthenticated}) => {
+  
   return (
     <div className={style.MainWindow}>
       <NaviBar />
@@ -15,8 +16,8 @@ const HomePage = ({logout, isAuthenticated}) => {
             <p>
               Witaj w aplikacji poświęconej społeczności pasjonatów akwarystyki.
               Tutaj możesz dzielić się informacjami oraz zdjęciami własnego
-              akwariu, poznawać akwarystów z okolicy i wymieniać sie z nimi
-              wiedzą oraz doświadczeniami
+              akwarium, poznawać akwarystów z okolicy i wymieniać sie z nimi
+              wiedzą oraz doświadczeniami.
             </p>
           </div>
           <div className={style.TalkFish}>
