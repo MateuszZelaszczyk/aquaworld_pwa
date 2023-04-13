@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/aquaworld_pwa/static/css/main.de310617.css",
-    "main.js": "/aquaworld_pwa/static/js/main.306a05cd.js",
+    "main.js": "/aquaworld_pwa/static/js/main.378fdd96.js",
     "static/js/787.56aa6482.chunk.js": "/aquaworld_pwa/static/js/787.56aa6482.chunk.js",
     "static/media/Fish.jpg": "/aquaworld_pwa/static/media/Fish.5d978f1d0e7fe5779fa4.jpg",
     "service-worker.js": "/aquaworld_pwa/service-worker.js",
@@ -24,11 +24,11 @@
     "static/media/AddFriend.svg": "/aquaworld_pwa/static/media/AddFriend.d72e8bf5435fb847400f04a912f293e9.svg",
     "static/media/plus.svg": "/aquaworld_pwa/static/media/plus.336edee210af0e5ee53635eb24c8b36a.svg",
     "main.de310617.css.map": "/aquaworld_pwa/static/css/main.de310617.css.map",
-    "main.306a05cd.js.map": "/aquaworld_pwa/static/js/main.306a05cd.js.map",
+    "main.378fdd96.js.map": "/aquaworld_pwa/static/js/main.378fdd96.js.map",
     "787.56aa6482.chunk.js.map": "/aquaworld_pwa/static/js/787.56aa6482.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.de310617.css",
-    "static/js/main.306a05cd.js"
+    "static/js/main.378fdd96.js"
   ]
 }
