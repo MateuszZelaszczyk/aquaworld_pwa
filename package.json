@@ -2,7 +2,7 @@
   "homepage": "https://mateuszzelaszczyk.github.io/",
   "name": "aquaworld_pwa",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "@stomp/stompjs": "^7.0.0",
