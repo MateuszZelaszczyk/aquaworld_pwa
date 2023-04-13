@@ -28,7 +28,7 @@ const NewPost = () => {
       data.append('uploaded_images', images[i])
     }
     axios
-      .post("http://localhost:8000/api/posts/", data, {
+      .post(`${process.env.REACT_APP_API_URL}/api/posts/`, data, {
         headers: { "Content-Type": "multipart/form-data", Authorization:`Bearer ${token}` },
       })
       .then((response) => {
