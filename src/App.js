@@ -29,21 +29,19 @@ const App = (isAuthenticated) => {
     const intervalId = setInterval(() => {
       refreshToken();
     }, TOKEN_REFRESH_INTERVAL);
-    try {
-      axios.interceptors.response.use(
-        (resp) => resp,
-        async (error) => {
-          if (error.response.status === 401) {
-            refreshToken();
-          }
+    const interceptor = axios.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        if (error.response && error.response.status === 401) {
+          refreshToken();
         }
-      );
-    } catch {
-      refreshToken();
-    }
-
+        return Promise.reject(error);
+      }
+    );
+  
     return () => {
       clearInterval(intervalId);
+      axios.interceptors.response.eject(interceptor);
     };
   }, []);
 
