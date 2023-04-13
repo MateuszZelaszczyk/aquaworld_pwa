@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import HomePage from "./HomePage/HomePage.js";
 import LoginPage from "./LogInPage/LogIn.js";
 import RegisterPage from "./RegisterPage/RegisterPage.js";
@@ -56,7 +57,7 @@ const App = (isAuthenticated) => {
 
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <Layout>
           <Routes>
             <Route exact path="/" element={<HomePage />} />
@@ -114,7 +115,7 @@ const App = (isAuthenticated) => {
             <Route exact path="/#!" element={<HomePage />} />
           </Routes>
         </Layout>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   );
 };
