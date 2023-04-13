@@ -1,4 +1,5 @@
 {
+  "homepage": "https://mateuszzelaszczyk.github.io/",
   "name": "aquaworld_pwa",
   "version": "0.1.0",
   "private": true,
@@ -70,6 +71,6 @@
   "devDependencies": {
     "gh-pages": "^5.0.0",
     "http-server": "^14.1.1"
-  },
-  "homepage": "https://mateuszzelaszczyk.github.io/aquaworld_pwa"
+  }
+  
 }
