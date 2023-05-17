@@ -19,7 +19,6 @@ const AddBase = () => {
   const id = useParams().id;
   const [isGround, setIsGround] = useState(false);
   const [baseId, setBaseId] = useState(null);
-
   const checkGround = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/api/groundInfo/${id}/`

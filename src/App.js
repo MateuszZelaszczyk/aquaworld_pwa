@@ -57,7 +57,7 @@ const App = (isAuthenticated) => {
 
   return (
     <Provider store={store}>
-      <HashRouter>
+      <BrowserRouter>
         <Layout>
           <Routes>
             <Route exact path="/" element={<HomePage />} />
@@ -115,7 +115,7 @@ const App = (isAuthenticated) => {
             <Route exact path="/#!" element={<HomePage />} />
           </Routes>
         </Layout>
-      </HashRouter>
+      </BrowserRouter>
     </Provider>
   );
 };

@@ -13,6 +13,7 @@ const UserAvatar = (props) => {
     var file = e.target.files[0];
     const objectURL = URL.createObjectURL(file);
     setAvatarShow(objectURL);
+    console.log(e)
   };
   const token = localStorage.getItem("access");
   const getData = async () => {
@@ -27,6 +28,7 @@ const UserAvatar = (props) => {
   };
   const updateAvatar = (e) => {
     e.preventDefault();
+    console.log(avatarURL)
     const response = axios.put(
       `${process.env.REACT_APP_API_URL}/api/updateAvatar/${id}/`,
       {

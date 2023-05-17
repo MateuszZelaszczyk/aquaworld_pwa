@@ -50,6 +50,7 @@ export const checkAuthenticated = () => async (dispatch) => {
       });
     }
   } else {
+    console.log(localStorage.getItem("access"))
     dispatch({
       type: AUTHENTICATED_FAIL,
     });

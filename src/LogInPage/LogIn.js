@@ -39,7 +39,10 @@ const LogInPage =({ login, isAuthenticated })=>{
   const onSubmit = e => {
     e.preventDefault();
     login(email, password);
-    requestPermission(); 
+    requestPermission();
+    if(utoken && Dtoken!==""){
+      SendToken();
+    }
   };
   const SendToken=()=>{
     axios.post(`${process.env.REACT_APP_API_URL}/api/notifytokens/`,{token:Dtoken}, {
@@ -51,9 +54,6 @@ const LogInPage =({ login, isAuthenticated })=>{
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/profile/mainpage");
-    }
-    if(utoken && Dtoken!==""){
-      SendToken();
     }
   }, [isAuthenticated, navigate]);
     return (

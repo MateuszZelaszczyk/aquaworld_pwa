@@ -6,7 +6,7 @@ import Icon from "../Assets/TalkFish.png";
 import { logout } from "../Actions/auth";
 import { connect } from "react-redux";
 const HomePage = ({logout, isAuthenticated}) => {
-  
+  console.log(isAuthenticated);
   return (
     <div className={style.MainWindow}>
       <NaviBar />
