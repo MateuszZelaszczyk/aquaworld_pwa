@@ -38,11 +38,13 @@ const LogInPage =({ login, isAuthenticated })=>{
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = e => {
     e.preventDefault();
-    login(email, password);
     requestPermission();
     if(utoken && Dtoken!==""){
       SendToken();
     }
+    login(email, password);
+
+
   };
   const SendToken=()=>{
     axios.post(`${process.env.REACT_APP_API_URL}/api/notifytokens/`,{token:Dtoken}, {
