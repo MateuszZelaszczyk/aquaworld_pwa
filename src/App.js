@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes} from "react-router-dom";
-import { HashRouter } from "react-router-dom";
 import HomePage from "./HomePage/HomePage.js";
 import LoginPage from "./LogInPage/LogIn.js";
 import RegisterPage from "./RegisterPage/RegisterPage.js";

@@ -25,7 +25,6 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  console.log(initialState)
   const { type, payload } = action;
 
   switch (type) {
